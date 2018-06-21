@@ -20,9 +20,50 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    // SUPPORT LIBRARY
     implementation 'com.android.support:appcompat-v7:27.1.1'
+    implementation 'com.android.support:support-v4:27.1.1'
+    implementation 'com.android.support:design:27.1.1'
+    implementation 'com.android.support:animated-vector-drawable:27.1.1'
+    implementation 'com.android.support:support-media-compat:27.1.1'
     implementation 'com.android.support.constraint:constraint-layout:1.1.2'
+    implementation 'com.android.support:cardview-v7:27.1.1'
+    implementation 'com.android.support:customtabs:27.1.1'
+
+    implementation 'com.android.support:multidex:1.0.3'
+
+    //RECYCLER VIEW
+    implementation 'com.android.support:recyclerview-v7:27.1.1'
+
+    // TESTING
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    androidTestImplementation 'android.arch.core:core-testing:1.1.1'
+
+    //BUTTERKNIFE
+    implementation 'com.jakewharton:butterknife:8.8.1'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
+
+    //GLIDE
+    implementation 'com.github.bumptech.glide:glide:4.3.1'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.3.1'
+
+    //ROOM
+    implementation 'android.arch.persistence.room:runtime:1.1.1'
+    annotationProcessor "android.arch.persistence.room:compiler:1.1.1"
+
+    //VIEW MODEL & LIVE DATA
+    implementation "android.arch.lifecycle:extensions:1.1.1"
+
+    //STETHO
+    implementation 'com.facebook.stetho:stetho:1.5.0'
+    implementation 'com.facebook.stetho:stetho-okhttp3:1.5.0'
+
+    //ANDROID-JOB
+    implementation 'com.evernote:android-job:1.2.5'
+
+    //EASY PERMISSIONS
+    implementation 'pub.devrel:easypermissions:1.1.1'
 }
