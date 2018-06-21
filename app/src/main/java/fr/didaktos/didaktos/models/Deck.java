@@ -30,6 +30,14 @@ public class Deck implements Parcelable {
 
     public Deck() { }
 
+    public Deck(String name, String imgUrl, int nbCards, String[] keys, String[] values) {
+        this.name = name;
+        this.imgUrl = imgUrl;
+        this.nbCards = nbCards;
+        this.keys = keys;
+        this.values = values;
+    }
+
     //---------------------------
     //GETTERS
     //--------------------------
