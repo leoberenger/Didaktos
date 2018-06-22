@@ -1,16 +1,15 @@
 package fr.didaktos.didaktos.models;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
-import android.content.ContentValues;
-import android.os.Parcel;
-import android.os.Parcelable;
 
 @Entity
 public class Deck {
 
     @PrimaryKey(autoGenerate = true)
     private long id;
-    private String name;
+    private String topic;
+    private String title;
+    private String description;
     private String imgUrl;
 
     //---------------------------
@@ -19,8 +18,10 @@ public class Deck {
 
     public Deck() { }
 
-    public Deck(String name, String imgUrl) {
-        this.name = name;
+    public Deck(String topic, String title, String description, String imgUrl) {
+        this.topic = topic;
+        this.title = title;
+        this.description = description;
         this.imgUrl = imgUrl;
     }
 
@@ -32,8 +33,14 @@ public class Deck {
     public long getId() {
         return id;
     }
-    public String getName() {
-        return name;
+    public String getTopic() {
+        return topic;
+    }
+    public String getTitle() {
+        return title;
+    }
+    public String getDescription() {
+        return description;
     }
     public String getImgUrl() {
         return imgUrl;
@@ -46,8 +53,14 @@ public class Deck {
     public void setId(long id) {
         this.id = id;
     }
-    public void setName(String name) {
-        this.name = name;
+    public void setTopic(String topic) {
+        this.topic = topic;
+    }
+    public void setTitle(String title) {
+        this.title = title;
+    }
+    public void setDescription(String description) {
+        this.description = description;
     }
     public void setImgUrl(String imgUrl) {
         this.imgUrl = imgUrl;

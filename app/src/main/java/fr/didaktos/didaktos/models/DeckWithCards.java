@@ -13,7 +13,9 @@ public class DeckWithCards  implements Parcelable {
     public static String DECK_KEY = "DECK";
 
     private long id;
-    private String name;
+    private String topic;
+    private String title;
+    private String description;
     private String imgUrl;
 
     @Relation(parentColumn = "id", entityColumn = "deckId")
@@ -25,9 +27,11 @@ public class DeckWithCards  implements Parcelable {
 
     public DeckWithCards(){}
 
-    public DeckWithCards(long id, String name, String imgUrl, List<Card> cards) {
+    public DeckWithCards(long id, String topic, String title, String description, String imgUrl, List<Card> cards) {
         this.id = id;
-        this.name = name;
+        this.topic = topic;
+        this.title = title;
+        this.description = description;
         this.imgUrl = imgUrl;
         this.cards = cards;
     }
@@ -40,8 +44,14 @@ public class DeckWithCards  implements Parcelable {
     public long getId() {
         return id;
     }
-    public String getName() {
-        return name;
+    public String getTopic() {
+        return topic;
+    }
+    public String getTitle() {
+        return title;
+    }
+    public String getDescription() {
+        return description;
     }
     public String getImgUrl() {
         return imgUrl;
@@ -57,8 +67,14 @@ public class DeckWithCards  implements Parcelable {
     public void setId(long id) {
         this.id = id;
     }
-    public void setName(String name) {
-        this.name = name;
+    public void setTopic(String topic) {
+        this.topic = topic;
+    }
+    public void setTitle(String title) {
+        this.title = title;
+    }
+    public void setDescription(String description) {
+        this.description = description;
     }
     public void setImgUrl(String imgUrl) {
         this.imgUrl = imgUrl;
@@ -80,7 +96,9 @@ public class DeckWithCards  implements Parcelable {
     @Override
     public void writeToParcel(Parcel out, int flags) {
         out.writeLong(id);
-        out.writeString(name);
+        out.writeString(topic);
+        out.writeString(title);
+        out.writeString(description);
         out.writeString(imgUrl);
         for (int i = 0; i<cards.size(); i++){
             out.writeParcelable(cards.get(i), flags);
@@ -101,7 +119,9 @@ public class DeckWithCards  implements Parcelable {
 
     private DeckWithCards(Parcel in) {
         id = in.readLong();
-        name = in.readString();
+        topic = in.readString();
+        title = in.readString();
+        description = in.readString();
         imgUrl = in.readString();
         for(int i = 0; i<cards.size(); i++){
             cards.add(in.readParcelable(ClassLoader.getSystemClassLoader()));

@@ -19,7 +19,8 @@ public class DecksViewHolder extends RecyclerView.ViewHolder {
     private String TAG = "ViewHolder";
 
     @BindView(R.id.decks_recycler_view_item_img) ImageView itemImg;
-    @BindView(R.id.decks_recycler_view_item_name) TextView itemName;
+    @BindView(R.id.decks_recycler_view_item_topic) TextView itemTopic;
+    @BindView(R.id.decks_recycler_view_item_title) TextView itemTitle;
     @BindView(R.id.decks_recycler_view_item_nbCards) TextView itemNbCards;
 
     public DecksViewHolder(View itemView){
@@ -32,12 +33,14 @@ public class DecksViewHolder extends RecyclerView.ViewHolder {
         //Img
         glide.load(d.getImgUrl()).into(itemImg);
 
-        //Name
-        this.itemName.setText(d.getName());
+        //Topic
+        this.itemTopic.setText(d.getTopic());
+
+        //Title
+        this.itemTitle.setText(d.getTitle());
 
         //Number of Cards
         String nbCards = d.getCards().size() + " cards";
         this.itemNbCards.setText(nbCards);
-
     }
 }

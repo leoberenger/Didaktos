@@ -12,8 +12,12 @@ public class DataGenerator {
     public static List<Deck> generateDecks(){
         List<Deck> decks = new ArrayList<>();
 
-        Deck deck0 = new Deck("English", "https://picsum.photos/200/200/?image=820");
-        Deck deck1 = new Deck("Physique : Atomes", "https://picsum.photos/200/200/?image=20");
+        Deck deck0 = new Deck("English", "Basic Verbs",
+                "Apprends les verbes les plus importants en anglais",
+                "https://picsum.photos/200/200/?image=820");
+        Deck deck1 = new Deck("Physique", "Atomes",
+                "Apprends les atomes et leurs numéros atomiques du tableau périodique",
+                "https://picsum.photos/200/200/?image=20");
 
         decks.add(deck0);
         decks.add(deck1);
@@ -24,11 +28,11 @@ public class DataGenerator {
     public static List<Card> generateCards(){
         List<Card> cards = new ArrayList<>();
 
-        Card card0 = new Card(1, "eat", "manger");
-        Card card1 = new Card(1, "drink", "boire");
-        Card card2 = new Card(1, "sleep", "dormir");
-        Card card3 = new Card(2, "1", "Hydrogène");
-        Card card4 = new Card(2, "2", "Hélium");
+        Card card0 = new Card(1, "eat", "manger", 0);
+        Card card1 = new Card(1, "drink", "boire", 0);
+        Card card2 = new Card(1, "sleep", "dormir", 0);
+        Card card3 = new Card(2, "1", "Hydrogène", 0);
+        Card card4 = new Card(2, "2", "Hélium", 0);
 
         cards.add(card0);
         cards.add(card1);

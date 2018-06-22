@@ -10,6 +10,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.facebook.stetho.Stetho;
 
@@ -116,6 +117,14 @@ public class MainActivity  extends AppCompatActivity
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.activity_main_main_fragment, mainFragment)
                     .commit();
+        }
+
+        //Show by default 1st item
+        if (decks.size() != 0){
+            deckId = decks.get(0).getId();
+            getDeckToShow(deckId);
+        }else{
+            Toast.makeText(this, "No property corresponding", Toast.LENGTH_LONG).show();
         }
     }
 

@@ -29,6 +29,8 @@ public class DetailFragment extends Fragment {
 
     //FOR DESIGN
     @BindView(R.id.detail_description) TextView textViewDescription;
+    @BindView(R.id.detail_topic) TextView textViewTopic;
+    @BindView(R.id.detail_title) TextView textViewTitle;
     @BindView(R.id.detail_examples) TextView textViewExamples;
     @BindView(R.id.detail_img) ImageView imageViewDescription;
     @BindView(R.id.detail_btn) Button button;
@@ -61,12 +63,14 @@ public class DetailFragment extends Fragment {
         }
 
         //Description
-        textViewDescription.setText(d.getName());
+        textViewTopic.setText(d.getTopic());
+        textViewTitle.setText(d.getTitle());
+        textViewDescription.setText(d.getDescription());
 
         //Examples
         StringBuilder stringBuilder = new StringBuilder();
         for (int i = 0; i<d.getCards().size(); i++){
-            String str = d.getCards().get(i).getKey() + "/" + d.getCards().get(i).getValue()+ " ";
+            String str = d.getCards().get(i).getKey() + "/" + d.getCards().get(i).getValue()+ "   ";
             stringBuilder.append(str);
         }
         String examples = stringBuilder.toString();

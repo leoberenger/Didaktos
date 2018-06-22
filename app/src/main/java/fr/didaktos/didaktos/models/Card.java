@@ -7,50 +7,67 @@ import android.os.Parcelable;
 
 @Entity
 public class Card implements Parcelable {
-    @PrimaryKey(autoGenerate = true) long id;
-    int deckId;
-    String key;
-    String value;
+    @PrimaryKey(autoGenerate = true) private long id;
+    private int deckId;
+    private String key;
+    private String value;
+    private int status;
 
-    public Card(int deckId, String key, String value) {
-        this.id = id;
+    //---------------------------
+    //CONSTRUCTORS
+    //--------------------------
+
+    public Card(int deckId, String key, String value, int status) {
         this.deckId = deckId;
         this.key = key;
         this.value = value;
+        this.status = status;
     }
+
+    //---------------------------
+    //GETTERS
+    //--------------------------
 
     public long getId() {
         return id;
     }
+    public int getDeckId() {
+        return deckId;
+    }
+    public String getKey() {
+        return key;
+    }
+    public String getValue() {
+        return value;
+    }
+    public int getStatus() {
+        return status;
+    }
+
+    //---------------------------
+    //SETTERS
+    //--------------------------
 
     public void setId(long id) {
         this.id = id;
     }
-
-    public int getDeckId() {
-        return deckId;
-    }
-
     public void setDeckId(int deckId) {
         this.deckId = deckId;
     }
-
-    public String getKey() {
-        return key;
-    }
-
     public void setKey(String key) {
         this.key = key;
     }
-
-    public String getValue() {
-        return value;
-    }
-
     public void setValue(String value) {
         this.value = value;
     }
+    public void setStatus(int status) {
+        this.status = status;
+    }
 
+
+    //---------------------------
+    //PARCELABLE METHODS
+    //--------------------------
 
     @Override
     public int describeContents() {
