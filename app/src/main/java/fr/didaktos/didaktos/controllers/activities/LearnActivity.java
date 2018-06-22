@@ -40,9 +40,7 @@ public class LearnActivity extends AppCompatActivity {
                     break;
             }
 
-            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-            transaction.replace(R.id.activity_learn_frame_layout, fragment);
-            transaction.commit();
+            replaceCurrentFragment(fragment);
 
             return true;
         }
@@ -56,18 +54,25 @@ public class LearnActivity extends AppCompatActivity {
         //retrieve deck
         if(getIntent().getParcelableExtra(DeckWithCards.DECK_KEY) != null){
             deck = getIntent().getParcelableExtra(DeckWithCards.DECK_KEY);
-            Log.e(TAG, "title = " + deck.getTitle());
-            Log.e(TAG, "cards size = " + deck.getCards().size());
         }
 
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.activity_learn_frame_layout,  new MemorizeFragment());
-        transaction.commit();
+        //Default Fragment
+        replaceCurrentFragment(new MemorizeFragment());
 
+        this.configureBottomNavigation();
+
+
+    }
+
+    private void replaceCurrentFragment(Fragment f){
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.activity_learn_frame_layout, f);
+        transaction.commit();
+    }
+
+    private void configureBottomNavigation(){
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-
-
     }
 
 }
