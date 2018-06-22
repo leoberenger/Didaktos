@@ -79,6 +79,7 @@ public class Card implements Parcelable {
         out.writeLong(id);
         out.writeString(key);
         out.writeString(value);
+        out.writeInt(status);
     }
 
     public static final Creator<Card> CREATOR
@@ -97,5 +98,6 @@ public class Card implements Parcelable {
         id = in.readLong();
         key = in.readString();
         value = in.readString();
+        status = in.readInt();
     }
 }
