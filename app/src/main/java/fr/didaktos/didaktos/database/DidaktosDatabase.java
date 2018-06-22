@@ -8,10 +8,12 @@ import android.arch.persistence.room.TypeConverters;
 import android.content.Context;
 import android.support.annotation.NonNull;
 
+import fr.didaktos.didaktos.database.dao.CardDAO;
 import fr.didaktos.didaktos.database.dao.DeckDAO;
+import fr.didaktos.didaktos.models.Card;
 import fr.didaktos.didaktos.models.Deck;
 
-@Database(entities = {Deck.class}, version = 1, exportSchema = false)
+@Database(entities = {Deck.class, Card.class}, version = 1, exportSchema = false)
 @TypeConverters({Converters.class})
 public abstract class DidaktosDatabase extends RoomDatabase {
 
@@ -20,6 +22,7 @@ public abstract class DidaktosDatabase extends RoomDatabase {
 
     // --- DAO ---
     public abstract DeckDAO deckDao();
+    public abstract CardDAO cardDao();
 
 
     // --- INSTANCE ---

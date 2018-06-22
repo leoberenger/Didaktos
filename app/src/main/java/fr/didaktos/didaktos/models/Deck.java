@@ -6,23 +6,11 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 @Entity
-public class Deck implements Parcelable {
+public class Deck{ //implements Parcelable {
 
-    public static String DECK_KEY = "deck";
-    public static String DECKS_KEY = "decks";
-    public static String DECK_ID = "DECK_ID";
-
-    public static String NAME_KEY = "name";
-    public static String IMG_URL_KEY = "imgUrl";
-    public static String NB_CARDS_KEY = "nbCards";
-
-
-    @PrimaryKey(autoGenerate = true) private long id;
+    @PrimaryKey(autoGenerate = true)
+    private long id;
     private String name;
-    private String imgUrl;
-    private int nbCards;
-    private String[] keys;
-    private String[] values;
 
     //---------------------------
     //CONSTRUCTORS
@@ -30,12 +18,8 @@ public class Deck implements Parcelable {
 
     public Deck() { }
 
-    public Deck(String name, String imgUrl, int nbCards, String[] keys, String[] values) {
+    public Deck(String name) {
         this.name = name;
-        this.imgUrl = imgUrl;
-        this.nbCards = nbCards;
-        this.keys = keys;
-        this.values = values;
     }
 
     //---------------------------
@@ -48,18 +32,7 @@ public class Deck implements Parcelable {
     public String getName() {
         return name;
     }
-    public String getImgUrl() {
-        return imgUrl;
-    }
-    public int getNbCards() {
-        return nbCards;
-    }
-    public String[] getKeys() {
-        return keys;
-    }
-    public String[] getValues() {
-        return values;
-    }
+
 
     //---------------------------
     //SETTERS
@@ -71,19 +44,7 @@ public class Deck implements Parcelable {
     public void setName(String name) {
         this.name = name;
     }
-    public void setImgUrl(String imgUrl) {
-        this.imgUrl = imgUrl;
-    }
-    public void setNbCards(int nbCards) {
-        this.nbCards = nbCards;
-    }
-    public void setKeys(String[] keys) {
-        this.keys = keys;
-    }
-    public void setValues(String[] values) {
-        this.values = values;
-    }
-
+/*
 
     //---------------------------
     //PARCELABLE METHODS
@@ -124,4 +85,5 @@ public class Deck implements Parcelable {
         in.readStringArray(keys);
         in.readStringArray(values);
     }
+    */
 }

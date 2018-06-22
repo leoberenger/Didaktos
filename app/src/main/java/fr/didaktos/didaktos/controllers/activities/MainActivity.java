@@ -1,11 +1,23 @@
 package fr.didaktos.didaktos.controllers.activities;
 
+import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModelProviders;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.facebook.stetho.Stetho;
+
+import java.util.List;
+
 import fr.didaktos.didaktos.R;
+import fr.didaktos.didaktos.database.DataGenerator;
+import fr.didaktos.didaktos.injections.Injection;
+import fr.didaktos.didaktos.injections.ViewModelFactory;
+import fr.didaktos.didaktos.models.Card;
 import fr.didaktos.didaktos.models.Deck;
+import fr.didaktos.didaktos.models.DeckWithCards;
 import fr.didaktos.didaktos.views.DeckViewModel;
 
 public class MainActivity extends AppCompatActivity {
@@ -19,32 +31,47 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        this.populateDatabase();
+        this.configureViewModel();
+
+        //this.populateDatabase();
+        Stetho.initializeWithDefaults(this);
+
+        this.deckViewModel.getDeck(1)
+                .observe(this, new Observer<Deck>() {
+                    @Override
+                    public void onChanged(@Nullable Deck deck) {
+                        Log.e(TAG, "deck name= " + deck.getName());
+                    }
+                });
+
+        this.deckViewModel.getDeckWithCards(1).observe(this, new Observer<DeckWithCards>() {
+            @Override
+            public void onChanged(@Nullable DeckWithCards deckWithCards) {
+                Log.e(TAG, "deck name= " + deckWithCards.getName());
+                Log.e(TAG, "card 0 key= " + deckWithCards.getCards().get(0).getKey()
+                        +"card 0 value= " + deckWithCards.getCards().get(0).getValue());
+            }
+        });
     }
 
     private void populateDatabase(){
 
-        Deck [] decks = new Deck[2];
-/*        for (int i = 0; i<decks.length; i++){
-            decks[i] = new Deck();
+        List<Deck> decks = DataGenerator.generateDecks();
+        for (int i = 0; i<decks.size(); i++){
+            this.deckViewModel.createDeck(decks.get(i));
         }
-  */
-        String [] deck0Keys = {"eat", "drink", "sleep", "study", "work",
-                                "travel", "think", "ask", "leave", "speak"};
-        String [] deck0Values = {"manger", "boire", "dormir", "étudier", "travailler",
-                                 "voyager", "penser", "demander", "partir", "parler"};
-        String [] deck1Keys = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10" };
-        String [] deck1Values = {"Hydrogène", "Hélium", "Lithium", "Béryllium", "Bore",
-                                 "Carbone", "Azote", "Oxygène", "Fluor", "Néon"};
 
-        decks[0] = new Deck("English", "https://picsum.photos/200/200/?image=820",
-                deck0Keys.length, deck0Keys, deck0Values);
-
-        decks[1] = new Deck("Physique : Atomes", "https://picsum.photos/200/200/?image=20",
-                deck1Keys.length, deck1Keys, deck1Values);
-
-        for(int i = 0; i<decks.length;i++) {
-            this.deckViewModel.createDeck(decks[i]);
+        List<Card> cards = DataGenerator.generateCards();
+        for (int i = 0; i<cards.size(); i++){
+            this.deckViewModel.createCard(cards.get(i));
         }
+
+    }
+
+    private void configureViewModel(){
+        ViewModelFactory viewModelFactory = Injection.provideViewModelFactory(this);
+        this.deckViewModel = ViewModelProviders.of(this, viewModelFactory)
+                .get(DeckViewModel.class);
+        this.deckViewModel.init();
     }
 }

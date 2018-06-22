@@ -5,6 +5,7 @@ import java.util.List;
 
 import fr.didaktos.didaktos.database.dao.DeckDAO;
 import fr.didaktos.didaktos.models.Deck;
+import fr.didaktos.didaktos.models.DeckWithCards;
 
 public class DeckDataRepository {
 
@@ -27,6 +28,12 @@ public class DeckDataRepository {
     public LiveData<Deck> getDeck(long deckId){
         return this.deckDAO.getDeck(deckId);
     }
+
+    public LiveData<DeckWithCards> getDeckWithCards(long deckId){
+        return this.deckDAO.getDeckWithCards(deckId);
+    }
+
+
 
     // UPDATE
     public void updateDeck(Deck d){
