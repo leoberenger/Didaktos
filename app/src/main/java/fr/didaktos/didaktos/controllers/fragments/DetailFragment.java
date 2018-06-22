@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -27,18 +28,10 @@ public class DetailFragment extends Fragment {
     private DeckWithCards deck;
 
     //FOR DESIGN
-    @BindView(R.id.fragment_detail_description)
-    TextView textViewDescription;
-    @BindView(R.id.fragment_detail_surface) TextView textViewSurface;
-    @BindView(R.id.fragment_detail_nbRooms) TextView textViewNbRooms;
-    @BindView(R.id.fragment_detail_pois) TextView textViewPOIs;
-    @BindView(R.id.fragment_detail_address_street) TextView textViewAddressStreet;
-    @BindView(R.id.fragment_detail_address_appt) TextView textViewAddressAppt;
-    @BindView(R.id.fragment_detail_address_city) TextView textViewAddressCity;
-    @BindView(R.id.fragment_detail_address_country) TextView textViewAddressCountry;
-    @BindView(R.id.fragment_detail_photo)
-    ImageView photo;
-    @BindView(R.id.fragment_detail_photo_description) TextView textViewPhotoDescription;
+    @BindView(R.id.detail_description) TextView textViewDescription;
+    @BindView(R.id.detail_examples) TextView textViewExamples;
+    @BindView(R.id.detail_img) ImageView imageViewDescription;
+    @BindView(R.id.detail_btn) Button button;
 
 
     public DetailFragment() {
@@ -61,18 +54,23 @@ public class DetailFragment extends Fragment {
     }
 
     private void updateShownDeck(DeckWithCards d){
-/*
-        //Img
-        if(!p.getPhotoUrl().isEmpty()) {
-            Glide.with(this).load(p.getPhotoUrl()).into(photo);
-            textViewPhotoDescription.setText(p.getPhotoDescription());
-        }else
-            textViewPhotoDescription.setText("No photo");
-*/
-        //Description
-            textViewDescription.setText(d.getName());
 
-        textViewNbRooms.setText(d.getCards().get(0).getValue());
+        //Img
+        if(!d.getImgUrl().isEmpty()) {
+            Glide.with(this).load(d.getImgUrl()).into(imageViewDescription);
+        }
+
+        //Description
+        textViewDescription.setText(d.getName());
+
+        //Examples
+        StringBuilder stringBuilder = new StringBuilder();
+        for (int i = 0; i<d.getCards().size(); i++){
+            String str = d.getCards().get(i).getKey() + "/" + d.getCards().get(i).getValue()+ " ";
+            stringBuilder.append(str);
+        }
+        String examples = stringBuilder.toString();
+        textViewExamples.setText(examples);
     }
 
 }

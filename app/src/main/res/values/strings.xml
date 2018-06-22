@@ -6,6 +6,10 @@
     <string name="menu_add">CREATE NEW</string>
     <string name="menu_search">SEARCH</string>
     <string name="menu_stats">STATS</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
+    <!-- DETAIL -->
+    <string name="detail_description">DESCRIPTION</string>
+    <string name="detail_examples">EXAMPLES</string>
+    <string name="detail_btn">LEARN NOW!</string>
 </resources>
