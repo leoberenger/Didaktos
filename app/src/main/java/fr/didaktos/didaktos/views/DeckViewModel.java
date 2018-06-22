@@ -53,6 +53,10 @@ public class DeckViewModel extends ViewModel {
         return deckDataSource.getDeckWithCards(deckId);
     }
 
+    public LiveData<List<DeckWithCards>> getDecksWithCards(){
+        return deckDataSource.getDecksWithCards();
+    }
+
     public void createDeck (Deck d){
         executor.execute(()->{
             deckDataSource.createDeck(d);

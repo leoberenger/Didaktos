@@ -1,6 +1,11 @@
 <resources>
     <string name="app_name">Didaktos</string>
 
+    <!-- MENU -->
+    <string name="menu_edit">EDIT</string>
+    <string name="menu_add">CREATE NEW</string>
+    <string name="menu_search">SEARCH</string>
+    <string name="menu_stats">STATS</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

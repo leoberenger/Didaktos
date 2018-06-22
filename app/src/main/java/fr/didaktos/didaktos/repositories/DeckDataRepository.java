@@ -33,6 +33,10 @@ public class DeckDataRepository {
         return this.deckDAO.getDeckWithCards(deckId);
     }
 
+    public LiveData<List<DeckWithCards>> getDecksWithCards(){
+        return this.deckDAO.getDecksWithCards();
+    }
+
 
 
     // UPDATE

@@ -28,6 +28,9 @@ public interface DeckDAO {
     @Query("SELECT * FROM Deck WHERE id = :deckId")
     LiveData<DeckWithCards> getDeckWithCards(long deckId);
 
+    @Query("SELECT * FROM Deck")
+    LiveData<List<DeckWithCards>> getDecksWithCards();
+
     @Insert
     long insertDeck(Deck deck);
 

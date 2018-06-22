@@ -6,7 +6,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 @Entity
-public class Deck{ //implements Parcelable {
+public class Deck {
 
     @PrimaryKey(autoGenerate = true)
     private long id;
@@ -33,7 +33,6 @@ public class Deck{ //implements Parcelable {
         return name;
     }
 
-
     //---------------------------
     //SETTERS
     //--------------------------
@@ -44,46 +43,5 @@ public class Deck{ //implements Parcelable {
     public void setName(String name) {
         this.name = name;
     }
-/*
 
-    //---------------------------
-    //PARCELABLE METHODS
-    //--------------------------
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel out, int flags) {
-        out.writeLong(id);
-        out.writeString(name);
-        out.writeString(imgUrl);
-        out.writeInt(nbCards);
-        out.writeStringArray(keys);
-        out.writeStringArray(values);
-    }
-
-    public static final Creator<Deck> CREATOR
-            = new Creator<Deck>() {
-
-        public Deck createFromParcel(Parcel in) {
-            return new Deck(in);
-        }
-
-        public Deck[] newArray(int size) {
-            return new Deck[size];
-        }
-    };
-
-    private Deck(Parcel in) {
-        id = in.readLong();
-        name = in.readString();
-        imgUrl = in.readString();
-        nbCards = in.readInt();
-        in.readStringArray(keys);
-        in.readStringArray(values);
-    }
-    */
 }
