@@ -4,6 +4,7 @@ import android.arch.persistence.room.Relation;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class DeckWithCards  implements Parcelable {
@@ -13,6 +14,8 @@ public class DeckWithCards  implements Parcelable {
 
     private long id;
     private String name;
+    private String imgUrl;
+
     @Relation(parentColumn = "id", entityColumn = "deckId")
     private List<Card> cards;
 
@@ -22,11 +25,13 @@ public class DeckWithCards  implements Parcelable {
 
     public DeckWithCards(){}
 
-    public DeckWithCards(int id, String name, List<Card> cards) {
+    public DeckWithCards(long id, String name, String imgUrl, List<Card> cards) {
         this.id = id;
         this.name = name;
+        this.imgUrl = imgUrl;
         this.cards = cards;
     }
+
 
     //---------------------------
     //GETTERS
@@ -37,6 +42,9 @@ public class DeckWithCards  implements Parcelable {
     }
     public String getName() {
         return name;
+    }
+    public String getImgUrl() {
+        return imgUrl;
     }
     public List<Card> getCards() {
         return cards;
@@ -52,9 +60,13 @@ public class DeckWithCards  implements Parcelable {
     public void setName(String name) {
         this.name = name;
     }
+    public void setImgUrl(String imgUrl) {
+        this.imgUrl = imgUrl;
+    }
     public void setCards(List<Card> cards) {
         this.cards = cards;
     }
+
 
     //---------------------------
     //PARCELABLE METHODS
@@ -69,6 +81,10 @@ public class DeckWithCards  implements Parcelable {
     public void writeToParcel(Parcel out, int flags) {
         out.writeLong(id);
         out.writeString(name);
+        out.writeString(imgUrl);
+        for (int i = 0; i<cards.size(); i++){
+            out.writeParcelable(cards.get(i), flags);
+        }
     }
 
     public static final Creator<DeckWithCards> CREATOR
@@ -86,5 +102,9 @@ public class DeckWithCards  implements Parcelable {
     private DeckWithCards(Parcel in) {
         id = in.readLong();
         name = in.readString();
+        imgUrl = in.readString();
+        for(int i = 0; i<cards.size(); i++){
+            cards.add(in.readParcelable(ClassLoader.getSystemClassLoader()));
+        }
     }
 }

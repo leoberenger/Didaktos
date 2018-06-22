@@ -12,8 +12,8 @@ public class DataGenerator {
     public static List<Deck> generateDecks(){
         List<Deck> decks = new ArrayList<>();
 
-        Deck deck0 = new Deck("English");
-        Deck deck1 = new Deck("Physique : Atomes");
+        Deck deck0 = new Deck("English", "https://picsum.photos/200/200/?image=820");
+        Deck deck1 = new Deck("Physique : Atomes", "https://picsum.photos/200/200/?image=20");
 
         decks.add(deck0);
         decks.add(deck1);

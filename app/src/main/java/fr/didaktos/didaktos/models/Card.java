@@ -2,9 +2,11 @@ package fr.didaktos.didaktos.models;
 
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 @Entity
-public class Card {
+public class Card implements Parcelable {
     @PrimaryKey(autoGenerate = true) long id;
     int deckId;
     String key;
@@ -47,5 +49,36 @@ public class Card {
 
     public void setValue(String value) {
         this.value = value;
+    }
+
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel out, int flags) {
+        out.writeLong(id);
+        out.writeString(key);
+        out.writeString(value);
+    }
+
+    public static final Creator<Card> CREATOR
+            = new Creator<Card>() {
+
+        public Card createFromParcel(Parcel in) {
+            return new Card(in);
+        }
+
+        public Card[] newArray(int size) {
+            return new Card[size];
+        }
+    };
+
+    private Card(Parcel in) {
+        id = in.readLong();
+        key = in.readString();
+        value = in.readString();
     }
 }

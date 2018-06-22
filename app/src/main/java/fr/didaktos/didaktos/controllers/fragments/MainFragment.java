@@ -39,14 +39,12 @@ public class MainFragment extends Fragment {
 
     //FOR DATA
     long deckId = -1;
-
-    // FOR DESIGN
-    @BindView(R.id.decks_recycler_view)
-    RecyclerView recyclerView;
-    private DecksRecyclerAdapter adapter;
     private List<DeckWithCards> decks;
     private ArrayList<DeckWithCards> mDeckArrayList;
 
+    // FOR DESIGN
+    @BindView(R.id.decks_recycler_view) RecyclerView recyclerView;
+    private DecksRecyclerAdapter adapter;
 
     public MainFragment() {
         // Required empty public constructor
@@ -91,6 +89,16 @@ public class MainFragment extends Fragment {
                 });
     }
 
+    // -----------------
+    // UPDATE UI
+    // -----------------
+
+    private void updateDecksList(List<DeckWithCards> decks){
+        this.decks.clear();
+        this.decks.addAll(decks);
+        adapter.notifyDataSetChanged();
+    }
+
 
     // -------------------------
     // COMMUNICATE WITH ACTIVITY
@@ -104,19 +112,11 @@ public class MainFragment extends Fragment {
             mCallback = (OnDecksListSelectedListener) activity;
         } catch (ClassCastException e) {
             throw new ClassCastException(activity.toString()
-                    + " must implement OnPropertiesListSelectedListener");
+                    + " must implement OnDecksListSelectedListener");
         }
     }
 
 
-    // -----------------
-    // UPDATE UI
-    // -----------------
 
-    private void updateDecksList(List<DeckWithCards> decks){
-        this.decks.clear();
-        this.decks.addAll(decks);
-        adapter.notifyDataSetChanged();
-    }
 
 }

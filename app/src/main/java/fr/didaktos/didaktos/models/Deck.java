@@ -11,6 +11,7 @@ public class Deck {
     @PrimaryKey(autoGenerate = true)
     private long id;
     private String name;
+    private String imgUrl;
 
     //---------------------------
     //CONSTRUCTORS
@@ -18,9 +19,11 @@ public class Deck {
 
     public Deck() { }
 
-    public Deck(String name) {
+    public Deck(String name, String imgUrl) {
         this.name = name;
+        this.imgUrl = imgUrl;
     }
+
 
     //---------------------------
     //GETTERS
@@ -32,6 +35,9 @@ public class Deck {
     public String getName() {
         return name;
     }
+    public String getImgUrl() {
+        return imgUrl;
+    }
 
     //---------------------------
     //SETTERS
@@ -42,6 +48,9 @@ public class Deck {
     }
     public void setName(String name) {
         this.name = name;
+    }
+    public void setImgUrl(String imgUrl) {
+        this.imgUrl = imgUrl;
     }
 
 }

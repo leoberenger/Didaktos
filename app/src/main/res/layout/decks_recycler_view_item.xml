@@ -12,7 +12,7 @@
         android:layout_height="match_parent">
 
         <ImageView
-            android:id="@+id/properties_recycler_view_item_img"
+            android:id="@+id/decks_recycler_view_item_img"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
@@ -25,7 +25,7 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/properties_recycler_view_item_type"
+            android:id="@+id/decks_recycler_view_item_name"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
@@ -34,20 +34,12 @@
             android:textColor="@android:color/black"/>
 
         <TextView
-            android:id="@+id/properties_recycler_view_item_area"
+            android:id="@+id/decks_recycler_view_item_nbCards"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
             android:textSize="14sp"
             android:textColor="@android:color/darker_gray"/>
-
-        <TextView
-            android:id="@+id/properties_recycler_view_item_price"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:textSize="20sp"
-            android:textColor="@color/colorAccent"/>
 
     </LinearLayout>
 </LinearLayout>

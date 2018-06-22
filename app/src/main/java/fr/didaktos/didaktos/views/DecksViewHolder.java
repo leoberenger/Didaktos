@@ -1,6 +1,7 @@
 package fr.didaktos.didaktos.views;
 
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -14,10 +15,12 @@ import fr.didaktos.didaktos.models.Deck;
 import fr.didaktos.didaktos.models.DeckWithCards;
 
 public class DecksViewHolder extends RecyclerView.ViewHolder {
-    @BindView(R.id.properties_recycler_view_item_area) TextView itemArea;
-    @BindView(R.id.properties_recycler_view_item_type) TextView itemType;
-    @BindView(R.id.properties_recycler_view_item_price) TextView itemPrice;
-    @BindView(R.id.properties_recycler_view_item_img) ImageView itemImg;
+
+    private String TAG = "ViewHolder";
+
+    @BindView(R.id.decks_recycler_view_item_img) ImageView itemImg;
+    @BindView(R.id.decks_recycler_view_item_name) TextView itemName;
+    @BindView(R.id.decks_recycler_view_item_nbCards) TextView itemNbCards;
 
     public DecksViewHolder(View itemView){
         super(itemView);
@@ -25,17 +28,16 @@ public class DecksViewHolder extends RecyclerView.ViewHolder {
     }
 
     public void updateWithDeck(DeckWithCards d, RequestManager glide){
-        //Type
-        this.itemType.setText(d.getName());
-
-        //Area
-        this.itemArea.setText(d.getName());
-
-        //Price
-        String price = "$" + d.getId();
-        this.itemPrice.setText(price);
 
         //Img
-//        glide.load(d.getPhotoUrl()).into(itemImg);
+        glide.load(d.getImgUrl()).into(itemImg);
+
+        //Name
+        this.itemName.setText(d.getName());
+
+        //Number of Cards
+        String nbCards = d.getCards().size() + " cards";
+        this.itemNbCards.setText(nbCards);
+
     }
 }

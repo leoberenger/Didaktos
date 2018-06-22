@@ -50,12 +50,15 @@ public class MainActivity  extends AppCompatActivity
         this.configureToolbar();
 
         this.configureViewModel();
-
         //this.populateDatabase();
         Stetho.initializeWithDefaults(this);
 
         this.deckViewModel.getDecksWithCards().observe(this, this::configureAndShowMainFragment);
     }
+
+    //-----------------------------------
+    // NAVIGATION
+    //-----------------------------------
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
@@ -135,15 +138,10 @@ public class MainActivity  extends AppCompatActivity
 
     }
 
-    private void getDeckToShow(long deckId){
-        this.deckViewModel.getDeckWithCards(deckId).observe(this, this::configureAndShowDetailFragment);
-    }
-
     //-----------------------------------
     // CALLBACKS
     //-----------------------------------
 
-    //From Callback in MainFragment, get Property Selected and show it in DetailFragment
     @Override
     public void onDeckSelected(long deckId) {
         this.deckId = deckId;
@@ -173,5 +171,9 @@ public class MainActivity  extends AppCompatActivity
         this.deckViewModel = ViewModelProviders.of(this, viewModelFactory)
                 .get(DeckViewModel.class);
         this.deckViewModel.init();
+    }
+
+    private void getDeckToShow(long deckId){
+        this.deckViewModel.getDeckWithCards(deckId).observe(this, this::configureAndShowDetailFragment);
     }
 }
