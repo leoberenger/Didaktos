@@ -2,8 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="fr.didaktos.didaktos">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
@@ -23,7 +23,10 @@
         <activity android:name=".controllers.activities.learn.QuizActivity" />
         <activity android:name=".controllers.activities.learn.TestActivity" />
         <activity android:name=".controllers.activities.EditionActivity" />
-        <activity android:name=".controllers.activities.learn.base.BaseActivity"></activity>
+        <activity android:name=".controllers.activities.learn.base.BaseActivity" />
+        <activity
+            android:name=".controllers.activities.LearnActivity"
+            android:label="@string/title_activity_learn"></activity>
     </application>
 
 </manifest>

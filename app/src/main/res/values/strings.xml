@@ -12,4 +12,10 @@
     <string name="detail_description">DESCRIPTION</string>
     <string name="detail_examples">EXAMPLES</string>
     <string name="detail_btn">LEARN NOW!</string>
+    <string name="title_activity_learn">LearnActivity</string>
+
+    <!-- LEARN -->
+    <string name="title_memorize">Memorize</string>
+    <string name="title_quiz">Quiz</string>
+    <string name="title_test">Test</string>
 </resources>

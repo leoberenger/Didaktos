@@ -8,7 +8,7 @@ import android.os.Parcelable;
 @Entity
 public class Card implements Parcelable {
     @PrimaryKey(autoGenerate = true) private long id;
-    private int deckId;
+    private long deckId;
     private String key;
     private String value;
     private int status;
@@ -17,7 +17,7 @@ public class Card implements Parcelable {
     //CONSTRUCTORS
     //--------------------------
 
-    public Card(int deckId, String key, String value, int status) {
+    public Card(long deckId, String key, String value, int status) {
         this.deckId = deckId;
         this.key = key;
         this.value = value;
@@ -31,7 +31,7 @@ public class Card implements Parcelable {
     public long getId() {
         return id;
     }
-    public int getDeckId() {
+    public long getDeckId() {
         return deckId;
     }
     public String getKey() {
@@ -51,7 +51,7 @@ public class Card implements Parcelable {
     public void setId(long id) {
         this.id = id;
     }
-    public void setDeckId(int deckId) {
+    public void setDeckId(long deckId) {
         this.deckId = deckId;
     }
     public void setKey(String key) {

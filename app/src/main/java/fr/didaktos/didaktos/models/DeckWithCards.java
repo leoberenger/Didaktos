@@ -7,6 +7,7 @@ import android.os.Parcelable;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class DeckWithCards  implements Parcelable {
 
     public static String DECKS_KEY = "DECKS";
@@ -100,9 +101,7 @@ public class DeckWithCards  implements Parcelable {
         out.writeString(title);
         out.writeString(description);
         out.writeString(imgUrl);
-        for (int i = 0; i<cards.size(); i++){
-            out.writeParcelable(cards.get(i), flags);
-        }
+        out.writeList(cards);
     }
 
     public static final Creator<DeckWithCards> CREATOR
@@ -123,8 +122,7 @@ public class DeckWithCards  implements Parcelable {
         title = in.readString();
         description = in.readString();
         imgUrl = in.readString();
-        for(int i = 0; i<cards.size(); i++){
-            cards.add(in.readParcelable(ClassLoader.getSystemClassLoader()));
-        }
+        cards = new ArrayList<Card>();
+        in.readList(cards, Card.class.getClassLoader());
     }
 }

@@ -1,8 +1,10 @@
 package fr.didaktos.didaktos.controllers.fragments;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +16,9 @@ import com.bumptech.glide.Glide;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import fr.didaktos.didaktos.R;
+import fr.didaktos.didaktos.controllers.activities.LearnActivity;
 import fr.didaktos.didaktos.models.DeckWithCards;
 
 /**
@@ -47,10 +51,10 @@ public class DetailFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_detail, container, false);
         ButterKnife.bind(this, view);
 
-        if(getArguments() != null) {
-            deck = getArguments().getParcelable(DeckWithCards.DECK_KEY);
-            updateShownDeck(deck);
-        }
+
+        deck = getArguments().getParcelable(DeckWithCards.DECK_KEY);
+        updateShownDeck(deck);
+
 
         return view;
     }
@@ -75,6 +79,14 @@ public class DetailFragment extends Fragment {
         }
         String examples = stringBuilder.toString();
         textViewExamples.setText(examples);
+    }
+
+    @OnClick(R.id.detail_btn)
+    public void onClickLearnButton(){
+        Log.e(TAG, "deck cards size = " + deck.getCards().size());
+        Intent intent = new Intent(getContext(), LearnActivity.class);
+        intent.putExtra(DeckWithCards.DECK_KEY, deck);
+        startActivity(intent);
     }
 
 }
