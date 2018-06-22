@@ -3,19 +3,23 @@ package fr.didaktos.didaktos.controllers.activities;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MenuItem;
 import android.widget.TextView;
 
 import fr.didaktos.didaktos.R;
+import fr.didaktos.didaktos.controllers.fragments.learn.MemorizeFragment;
+import fr.didaktos.didaktos.controllers.fragments.learn.QuizFragment;
+import fr.didaktos.didaktos.controllers.fragments.learn.TestFragment;
 import fr.didaktos.didaktos.models.DeckWithCards;
 
 public class LearnActivity extends AppCompatActivity {
 
     private String TAG = "Learn Activity";
 
-    private TextView mTextMessage;
     private DeckWithCards deck;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
@@ -23,18 +27,24 @@ public class LearnActivity extends AppCompatActivity {
 
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            Fragment fragment = null;
             switch (item.getItemId()) {
                 case R.id.navigation_memorize:
-                    mTextMessage.setText(R.string.title_memorize);
-                    return true;
+                    fragment = new MemorizeFragment();
+                    break;
                 case R.id.navigation_quiz:
-                    mTextMessage.setText(R.string.title_quiz);
-                    return true;
+                    fragment = new QuizFragment();
+                    break;
                 case R.id.navigation_test:
-                    mTextMessage.setText(R.string.title_test);
-                    return true;
+                    fragment = new TestFragment();
+                    break;
             }
-            return false;
+
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+            transaction.replace(R.id.activity_learn_frame_layout, fragment);
+            transaction.commit();
+
+            return true;
         }
     };
 
@@ -43,18 +53,21 @@ public class LearnActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_learn);
 
-        //if Edit, retrieve property
+        //retrieve deck
         if(getIntent().getParcelableExtra(DeckWithCards.DECK_KEY) != null){
             deck = getIntent().getParcelableExtra(DeckWithCards.DECK_KEY);
             Log.e(TAG, "title = " + deck.getTitle());
             Log.e(TAG, "cards size = " + deck.getCards().size());
-
-
         }
 
-        mTextMessage = (TextView) findViewById(R.id.message);
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.activity_learn_frame_layout,  new MemorizeFragment());
+        transaction.commit();
+
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+
+
     }
 
 }
