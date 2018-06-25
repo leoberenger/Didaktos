@@ -22,6 +22,7 @@
     <string name="learn_answer">Réponse</string>
     <string name="test_answer_hint">Votre réponse</string>
     <string name="test_check">Vérifier</string>
+    <string name="memorize_answer_btn"> "?" </string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

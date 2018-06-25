@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
@@ -28,6 +29,7 @@ public abstract class BaseLearnActivity extends AppCompatActivity {
     @BindView(R.id.activity_learn_toolbar) Toolbar mToolbar;
     @BindView(R.id.question) TextView questionTextView;
     @BindView(R.id.fragment_base_empty_frame) FrameLayout valueFrameLayout;
+    @BindView(R.id.fab) FloatingActionButton nextFab;
 
 
     @Override

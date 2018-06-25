@@ -1,5 +1,6 @@
 package fr.didaktos.didaktos.controllers.activities.learn;
 
+import android.graphics.Color;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -10,6 +11,9 @@ import fr.didaktos.didaktos.R;
 public class TestActivity extends BaseLearnActivity implements View.OnClickListener{
 
     private String TAG = "TestActivity";
+
+    private Button checkAnswerBtn;
+    private EditText answerEditText;
 
     @Override
     protected View getValueLayout() {
@@ -23,18 +27,20 @@ public class TestActivity extends BaseLearnActivity implements View.OnClickListe
 
     @Override
     protected void configureAnswer() {
-        Button checkAnswerBtn = (Button)findViewById(R.id.test_check);
+        checkAnswerBtn = (Button)findViewById(R.id.test_check);
         checkAnswerBtn.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
-        EditText answerEditText = (EditText)findViewById(R.id.test_answer);
+        answerEditText = (EditText)findViewById(R.id.test_answer);
 
         if(answerEditText.getText().toString().equals(deck.getCards().get(0).getValue())){
-            Log.e(TAG, "Good answer");
+            answerEditText.setBackgroundColor(Color.GREEN);
         }else {
-            Log.e(TAG, "Wrong answer");
+            answerEditText.setBackgroundColor(Color.RED);
         }
+
+        nextFab.setVisibility(View.VISIBLE);
     }
 }

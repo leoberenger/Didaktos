@@ -1,5 +1,6 @@
 package fr.didaktos.didaktos.controllers.activities.learn;
 
+import android.graphics.Color;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -9,6 +10,8 @@ import fr.didaktos.didaktos.R;
 public class QuizActivity extends BaseLearnActivity implements View.OnClickListener{
 
     private String TAG = "QuizActivity";
+
+    Button [] buttons = new Button[4];
 
     @Override
     protected View getValueLayout() {
@@ -30,28 +33,30 @@ public class QuizActivity extends BaseLearnActivity implements View.OnClickListe
 
         shuffleArray(answers);
 
-        Button answer0 = (Button) findViewById(R.id.quiz_answer_0_btn);
-        Button answer1 = (Button) findViewById(R.id.quiz_answer_1_btn);
-        Button answer2 = (Button) findViewById(R.id.quiz_answer_2_btn);
-        Button answer3 = (Button) findViewById(R.id.quiz_answer_3_btn);
+        buttons[0] = (Button) findViewById(R.id.quiz_answer_0_btn);
+        buttons[1] = (Button) findViewById(R.id.quiz_answer_1_btn);
+        buttons[2] = (Button) findViewById(R.id.quiz_answer_2_btn);
+        buttons[3] = (Button) findViewById(R.id.quiz_answer_3_btn);
 
-        Button [] buttons = {answer0, answer1, answer2, answer3};
         for (int i = 0; i<buttons.length; i++){
             buttons[i].setOnClickListener(this);
+            buttons[i].setTag(i);
             buttons[i].setText(answers[i]);
         }
     }
 
     @Override
     public void onClick(View v) {
-        Button b = (Button)v;
-        String buttonText = b.getText().toString();
 
-        if(buttonText == deck.getCards().get(0).getValue()){
-            Log.e(TAG, "Good answer");
-        }else {
-            Log.e(TAG, "Wrong answer");
+        for(Button button : buttons){
+            if(button.getText().toString().equals(deck.getCards().get(0).getValue())){
+                button.setBackgroundColor(Color.GREEN);
+            }else {
+                button.setBackgroundColor(Color.RED);
+            }
         }
+
+        nextFab.setVisibility(View.VISIBLE);
     }
 
 
