@@ -6,9 +6,12 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import fr.didaktos.didaktos.R;
 import fr.didaktos.didaktos.controllers.fragments.learn.MemorizeFragment;
 import fr.didaktos.didaktos.controllers.fragments.learn.MemorizeViewPagerFragment;
@@ -22,19 +25,27 @@ public class LearnActivity extends AppCompatActivity {
 
     private DeckWithCards deck;
 
+    @BindView(R.id.activity_learn_toolbar) Toolbar mToolbar;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_learn);
+        ButterKnife.bind(this);
 
         //retrieve deck
         if(getIntent().getParcelableExtra(DeckWithCards.DECK_KEY) != null){
             deck = getIntent().getParcelableExtra(DeckWithCards.DECK_KEY);
         }
 
+        this.configureToolbar();
         this.replaceCurrentFragment(new MemorizeViewPagerFragment());
         this.configureBottomNavigation();
+    }
+
+    private void configureToolbar(){
+        setSupportActionBar(mToolbar);
     }
 
     private void replaceCurrentFragment(Fragment fragment){
