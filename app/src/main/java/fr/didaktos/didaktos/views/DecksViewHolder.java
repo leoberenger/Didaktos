@@ -1,7 +1,6 @@
 package fr.didaktos.didaktos.views;
 
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -11,7 +10,6 @@ import com.bumptech.glide.RequestManager;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.didaktos.didaktos.R;
-import fr.didaktos.didaktos.models.Deck;
 import fr.didaktos.didaktos.models.DeckWithCards;
 
 public class DecksViewHolder extends RecyclerView.ViewHolder {

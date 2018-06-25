@@ -18,7 +18,6 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.didaktos.didaktos.R;
-import fr.didaktos.didaktos.models.Deck;
 import fr.didaktos.didaktos.models.DeckWithCards;
 import fr.didaktos.didaktos.utils.ItemClickSupport;
 import fr.didaktos.didaktos.views.DecksRecyclerAdapter;
@@ -31,14 +30,14 @@ public class MainFragment extends Fragment {
     String TAG = "Main Fragment";
 
     //FOR CALLBACK
-    OnDecksListSelectedListener mCallback;
+    private OnDecksListSelectedListener mCallback;
 
     public interface OnDecksListSelectedListener{
         void onDeckSelected(long deckId);
     }
 
     //FOR DATA
-    long deckId = -1;
+    private long deckId = -1;
     private List<DeckWithCards> decks;
     private ArrayList<DeckWithCards> mDeckArrayList;
 
@@ -60,10 +59,13 @@ public class MainFragment extends Fragment {
         this.configureRecyclerView();
         this.configureOnClickRecyclerView();
 
-        mDeckArrayList = getArguments().getParcelableArrayList(DeckWithCards.DECKS_KEY);
-        if(mDeckArrayList.size() != 0) {
-            this.updateDecksList(mDeckArrayList);
+        if(getArguments() != null) {
+            mDeckArrayList = getArguments().getParcelableArrayList(DeckWithCards.DECKS_KEY);
+            if(mDeckArrayList.size() != 0) {
+                this.updateDecksList(mDeckArrayList);
+            }
         }
+
         return view;
     }
 
@@ -80,12 +82,9 @@ public class MainFragment extends Fragment {
 
     private void configureOnClickRecyclerView(){
         ItemClickSupport.addTo(recyclerView, R.layout.decks_recycler_view_item)
-                .setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
-                    @Override
-                    public void onItemClicked(RecyclerView recyclerView, int position, View v) {
-                        deckId = adapter.getResult(position).getId();
-                        mCallback.onDeckSelected(deckId);
-                    }
+                .setOnItemClickListener((recyclerView, position, v) -> {
+                    deckId = adapter.getResult(position).getId();
+                    mCallback.onDeckSelected(deckId);
                 });
     }
 

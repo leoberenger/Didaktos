@@ -11,7 +11,8 @@
         android:id="@+id/test_answer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="@string/test_answer_hint"/>
+        android:hint="@string/test_answer_hint"
+        android:inputType="text"/>
 
     <Button
         android:id="@+id/test_check"

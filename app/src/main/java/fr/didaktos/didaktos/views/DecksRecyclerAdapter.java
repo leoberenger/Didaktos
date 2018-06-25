@@ -12,7 +12,6 @@ import com.bumptech.glide.RequestManager;
 import java.util.List;
 
 import fr.didaktos.didaktos.R;
-import fr.didaktos.didaktos.models.Deck;
 import fr.didaktos.didaktos.models.DeckWithCards;
 
 public class DecksRecyclerAdapter  extends RecyclerView.Adapter<DecksViewHolder>{

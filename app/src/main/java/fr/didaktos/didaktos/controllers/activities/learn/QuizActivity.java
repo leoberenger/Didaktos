@@ -1,7 +1,6 @@
 package fr.didaktos.didaktos.controllers.activities.learn;
 
 import android.graphics.Color;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
@@ -11,7 +10,7 @@ public class QuizActivity extends BaseLearnActivity implements View.OnClickListe
 
     private String TAG = "QuizActivity";
 
-    Button [] buttons = new Button[4];
+    private final Button [] buttons = new Button[4];
 
     @Override
     protected View getValueLayout() {

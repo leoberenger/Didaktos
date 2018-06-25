@@ -26,7 +26,7 @@ import fr.didaktos.didaktos.models.DeckWithCards;
  */
 public class DetailFragment extends Fragment {
 
-    String TAG = "DetailFragment";
+    private final String TAG = "DetailFragment";
 
     //FOR DATA
     private DeckWithCards deck;
@@ -52,9 +52,10 @@ public class DetailFragment extends Fragment {
         ButterKnife.bind(this, view);
 
 
-        deck = getArguments().getParcelable(DeckWithCards.DECK_KEY);
-        updateShownDeck(deck);
-
+        if(getArguments()!=null){
+            deck = getArguments().getParcelable(DeckWithCards.DECK_KEY);
+            updateShownDeck(deck);
+        }
 
         return view;
     }

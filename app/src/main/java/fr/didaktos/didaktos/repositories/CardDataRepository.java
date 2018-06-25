@@ -5,10 +5,7 @@ import android.arch.lifecycle.LiveData;
 import java.util.List;
 
 import fr.didaktos.didaktos.database.dao.CardDAO;
-import fr.didaktos.didaktos.database.dao.DeckDAO;
 import fr.didaktos.didaktos.models.Card;
-import fr.didaktos.didaktos.models.Deck;
-import fr.didaktos.didaktos.models.DeckWithCards;
 
 public class CardDataRepository {
 

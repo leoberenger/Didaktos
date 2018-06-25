@@ -10,8 +10,8 @@ import java.util.List;
 
 public class DeckWithCards  implements Parcelable {
 
-    public static String DECKS_KEY = "DECKS";
-    public static String DECK_KEY = "DECK";
+    public static final String DECKS_KEY = "DECKS";
+    public static final String DECK_KEY = "DECK";
     public static String NB_CARDS_KEY = "NB_CARDS";
     public static String KEY_KEY = "KEY";
     public static String VALUE_KEY = "VALUE";
@@ -126,7 +126,7 @@ public class DeckWithCards  implements Parcelable {
         title = in.readString();
         description = in.readString();
         imgUrl = in.readString();
-        cards = new ArrayList<Card>();
+        cards = new ArrayList<>();
         in.readList(cards, Card.class.getClassLoader());
     }
 }

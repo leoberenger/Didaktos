@@ -10,8 +10,6 @@ import android.database.Cursor;
 import java.util.List;
 
 import fr.didaktos.didaktos.models.Card;
-import fr.didaktos.didaktos.models.Deck;
-import fr.didaktos.didaktos.models.DeckWithCards;
 
 @Dao
 public interface CardDAO {

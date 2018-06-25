@@ -58,15 +58,11 @@ public class DeckViewModel extends ViewModel {
     }
 
     public void createDeck (Deck d){
-        executor.execute(()->{
-            deckDataSource.createDeck(d);
-        });
+        executor.execute(()-> deckDataSource.createDeck(d));
     }
 
     public void updateDeck (final Deck d){
-        executor.execute(() -> {
-            deckDataSource.updateDeck(d);
-        });
+        executor.execute(() -> deckDataSource.updateDeck(d));
     }
 
     //------------------------
@@ -82,14 +78,10 @@ public class DeckViewModel extends ViewModel {
     }
 
     public void createCard (Card c){
-        executor.execute(()->{
-            cardDataSource.createCard(c);
-        });
+        executor.execute(()-> cardDataSource.createCard(c));
     }
 
     public void updateCard (final Card c){
-        executor.execute(() -> {
-            cardDataSource.updateCard(c);
-        });
+        executor.execute(() -> cardDataSource.updateCard(c));
     }
 }

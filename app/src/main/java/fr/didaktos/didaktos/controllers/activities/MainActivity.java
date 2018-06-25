@@ -1,13 +1,10 @@
 package fr.didaktos.didaktos.controllers.activities;
 
-import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
-import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -39,8 +36,7 @@ public class MainActivity  extends AppCompatActivity
     private long deckId = -1;
     private DeckViewModel deckViewModel;
 
-    @BindView(R.id.toolbar)
-    Toolbar mToolbar;
+    @BindView(R.id.toolbar) Toolbar mToolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

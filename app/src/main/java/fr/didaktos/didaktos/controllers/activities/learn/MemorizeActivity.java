@@ -8,7 +8,7 @@ import fr.didaktos.didaktos.R;
 
 public class MemorizeActivity extends BaseLearnActivity implements View.OnClickListener {
 
-    Button answerBtn;
+    private Button answerBtn;
 
     @Override
     protected View getValueLayout() {

@@ -24,7 +24,7 @@ public abstract class BaseLearnActivity extends AppCompatActivity {
     protected abstract View getValueLayout();
     protected abstract int getCardNumber();
     protected abstract void configureAnswer();
-    protected DeckWithCards deck;
+    DeckWithCards deck;
 
     @BindView(R.id.activity_learn_toolbar) Toolbar mToolbar;
     @BindView(R.id.question) TextView questionTextView;
@@ -60,7 +60,7 @@ public abstract class BaseLearnActivity extends AppCompatActivity {
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
     }
 
-    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
+    private final BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
         @Override
