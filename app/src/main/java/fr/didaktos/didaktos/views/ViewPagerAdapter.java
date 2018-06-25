@@ -7,23 +7,27 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 import fr.didaktos.didaktos.controllers.fragments.learn.MemorizeFragment;
 import fr.didaktos.didaktos.controllers.fragments.learn.QuizFragment;
 import fr.didaktos.didaktos.controllers.fragments.learn.TestFragment;
+import fr.didaktos.didaktos.models.DeckWithCards;
 
 public class ViewPagerAdapter extends FragmentStatePagerAdapter {
-        private int[]colors;
 
-        public ViewPagerAdapter(FragmentManager fm, int[] colors) {
+        private DeckWithCards deck;
+
+        public ViewPagerAdapter(FragmentManager fm, DeckWithCards deck) {
             super(fm);
-            this.colors = colors;
+            this.deck = deck;
         }
 
         @Override
         public int getCount() {
-            return 5;
+            return deck.getCards().size();
         }
 
         @Override
         public Fragment getItem(int position) {
-            return (MemorizeFragment.newInstance(position, this.colors[position]));
+            return (MemorizeFragment.newInstance(position,
+                    deck.getCards().get(position).getKey(),
+                    deck.getCards().get(position).getValue()));
         }
 
         @Override

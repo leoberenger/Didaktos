@@ -6,9 +6,11 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.MenuItem;
 
 import fr.didaktos.didaktos.R;
+import fr.didaktos.didaktos.controllers.fragments.learn.MemorizeFragment;
 import fr.didaktos.didaktos.controllers.fragments.learn.MemorizeViewPagerFragment;
 import fr.didaktos.didaktos.controllers.fragments.learn.QuizFragment;
 import fr.didaktos.didaktos.controllers.fragments.learn.TestFragment;
@@ -20,25 +22,6 @@ public class LearnActivity extends AppCompatActivity {
 
     private DeckWithCards deck;
 
-    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
-            = new BottomNavigationView.OnNavigationItemSelectedListener() {
-
-        @Override
-        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-            switch (item.getItemId()) {
-                case R.id.navigation_memorize:
-                    replaceCurrentFragment(new MemorizeViewPagerFragment(), "FRAGMENT_VIEWPAGER");
-                    return true;
-                case R.id.navigation_quiz:
-                    replaceCurrentFragment(new QuizFragment(), "FRAGMENT QUIZ");
-                    return true;
-                case R.id.navigation_test:
-                    replaceCurrentFragment(new TestFragment(), "FRAGMENT TEST");
-                    return true;
-            }
-            return false;
-        }
-    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,19 +33,16 @@ public class LearnActivity extends AppCompatActivity {
             deck = getIntent().getParcelableExtra(DeckWithCards.DECK_KEY);
         }
 
-        //Default Fragment
-        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.add(R.id.activity_learn_frame_layout, new TestFragment(), "TEST FRAGMENT")
-                .commit();
-
+        this.replaceCurrentFragment(new MemorizeViewPagerFragment());
         this.configureBottomNavigation();
-
-
     }
 
-    private void replaceCurrentFragment(Fragment fragment, String tag){
+    private void replaceCurrentFragment(Fragment fragment){
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.activity_learn_frame_layout, fragment, tag)
+        Bundle bundle = new Bundle();
+        bundle.putParcelable(DeckWithCards.DECK_KEY, deck);
+        fragment.setArguments(bundle);
+        transaction.replace(R.id.activity_learn_frame_layout, fragment)
                     .commit();
     }
 
@@ -70,4 +50,29 @@ public class LearnActivity extends AppCompatActivity {
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
     }
+
+    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
+            = new BottomNavigationView.OnNavigationItemSelectedListener() {
+
+        @Override
+        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+            Fragment fragment = new Fragment();
+
+            switch (item.getItemId()) {
+                case R.id.navigation_memorize:
+                    fragment = new MemorizeViewPagerFragment();
+                    break;
+                case R.id.navigation_quiz:
+                    fragment = new QuizFragment();
+                    break;
+                case R.id.navigation_test:
+                    fragment = new TestFragment();
+                    break;
+            }
+
+            replaceCurrentFragment(fragment);
+            return true;
+        }
+    };
 }
