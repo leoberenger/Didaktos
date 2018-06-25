@@ -10,4 +10,5 @@
 
     <dimen name="quiz_btn_width">100dp</dimen>
     <dimen name="quiz_btn_height">40dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
 </resources>

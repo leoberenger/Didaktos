@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".controllers.fragments.learn.ExamFragment"
+    android:orientation="vertical">
+
+    <EditText
+        android:id="@+id/test_answer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="@string/test_answer_hint"/>
+
+    <Button
+        android:id="@+id/test_check"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/test_check"
+        android:layout_marginTop="@dimen/quiz_btn_height"/>
+
+</FrameLayout>

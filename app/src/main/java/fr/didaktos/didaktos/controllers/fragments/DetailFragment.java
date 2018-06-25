@@ -18,7 +18,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import fr.didaktos.didaktos.R;
-import fr.didaktos.didaktos.controllers.activities.LearnActivity;
+import fr.didaktos.didaktos.controllers.activities.learn.MemorizeActivity;
 import fr.didaktos.didaktos.models.DeckWithCards;
 
 /**
@@ -84,7 +84,7 @@ public class DetailFragment extends Fragment {
     @OnClick(R.id.detail_btn)
     public void onClickLearnButton(){
         Log.e(TAG, "deck cards size = " + deck.getCards().size());
-        Intent intent = new Intent(getContext(), LearnActivity.class);
+        Intent intent = new Intent(getContext(), MemorizeActivity.class);
         intent.putExtra(DeckWithCards.DECK_KEY, deck);
         startActivity(intent);
     }

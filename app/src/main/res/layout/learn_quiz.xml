@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".controllers.fragments.learn.ExamFragment"
+    android:orientation="vertical">
+
+    <Button
+        android:id="@+id/quiz_answer_0_btn"
+        android:layout_width="@dimen/quiz_btn_width"
+        android:layout_height="@dimen/quiz_btn_height"/>
+
+    <Button
+        android:id="@+id/quiz_answer_1_btn"
+        android:layout_width="@dimen/quiz_btn_width"
+        android:layout_height="@dimen/quiz_btn_height"
+        android:layout_below="@id/quiz_answer_0_btn"/>
+
+    <Button
+        android:id="@+id/quiz_answer_2_btn"
+        android:layout_width="@dimen/quiz_btn_width"
+        android:layout_height="@dimen/quiz_btn_height"
+        android:layout_toEndOf="@id/quiz_answer_0_btn"
+        android:layout_alignTop="@id/quiz_answer_0_btn"/>
+
+    <Button
+        android:id="@+id/quiz_answer_3_btn"
+        android:layout_width="@dimen/quiz_btn_width"
+        android:layout_height="@dimen/quiz_btn_height"
+        android:layout_below="@id/quiz_answer_2_btn"
+        android:layout_toEndOf="@id/quiz_answer_1_btn"/>
+
+</RelativeLayout>
