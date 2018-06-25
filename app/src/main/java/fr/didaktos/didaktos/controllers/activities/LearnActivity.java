@@ -6,12 +6,10 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.MenuItem;
-import android.widget.TextView;
 
 import fr.didaktos.didaktos.R;
-import fr.didaktos.didaktos.controllers.fragments.learn.MemorizeFragment;
+import fr.didaktos.didaktos.controllers.fragments.learn.MemorizeViewPagerFragment;
 import fr.didaktos.didaktos.controllers.fragments.learn.QuizFragment;
 import fr.didaktos.didaktos.controllers.fragments.learn.TestFragment;
 import fr.didaktos.didaktos.models.DeckWithCards;
@@ -27,22 +25,18 @@ public class LearnActivity extends AppCompatActivity {
 
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-            Fragment fragment = null;
             switch (item.getItemId()) {
                 case R.id.navigation_memorize:
-                    fragment = new MemorizeFragment();
-                    break;
+                    replaceCurrentFragment(new MemorizeViewPagerFragment(), "FRAGMENT_VIEWPAGER");
+                    return true;
                 case R.id.navigation_quiz:
-                    fragment = new QuizFragment();
-                    break;
+                    replaceCurrentFragment(new QuizFragment(), "FRAGMENT QUIZ");
+                    return true;
                 case R.id.navigation_test:
-                    fragment = new TestFragment();
-                    break;
+                    replaceCurrentFragment(new TestFragment(), "FRAGMENT TEST");
+                    return true;
             }
-
-            replaceCurrentFragment(fragment);
-
-            return true;
+            return false;
         }
     };
 
@@ -57,22 +51,23 @@ public class LearnActivity extends AppCompatActivity {
         }
 
         //Default Fragment
-        replaceCurrentFragment(new MemorizeFragment());
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.add(R.id.activity_learn_frame_layout, new TestFragment(), "TEST FRAGMENT")
+                .commit();
 
         this.configureBottomNavigation();
 
 
     }
 
-    private void replaceCurrentFragment(Fragment f){
+    private void replaceCurrentFragment(Fragment fragment, String tag){
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.activity_learn_frame_layout, f);
-        transaction.commit();
+        transaction.replace(R.id.activity_learn_frame_layout, fragment, tag)
+                    .commit();
     }
 
     private void configureBottomNavigation(){
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
     }
-
 }
