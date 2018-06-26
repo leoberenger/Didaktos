@@ -5,7 +5,7 @@ import android.arch.persistence.room.PrimaryKey;
 @Entity
 public class Deck {
 
-    @PrimaryKey(autoGenerate = true)
+    @PrimaryKey
     private long id;
     private String topic;
     private String title;
@@ -18,7 +18,8 @@ public class Deck {
 
     public Deck() { }
 
-    public Deck(String topic, String title, String description, String imgUrl) {
+    public Deck(long id, String topic, String title, String description, String imgUrl) {
+        this.id = id;
         this.topic = topic;
         this.title = title;
         this.description = description;

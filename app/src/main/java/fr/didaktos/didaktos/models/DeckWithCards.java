@@ -12,6 +12,7 @@ public class DeckWithCards  implements Parcelable {
 
     public static final String DECKS_KEY = "DECKS";
     public static final String DECK_KEY = "DECK";
+    public static final String NEXT_DECK_ID_KEY = "NEXT_ID";
     public static String NB_CARDS_KEY = "NB_CARDS";
     public static String KEY_KEY = "KEY";
     public static String VALUE_KEY = "VALUE";
@@ -31,6 +32,15 @@ public class DeckWithCards  implements Parcelable {
     //--------------------------
 
     public DeckWithCards(){}
+
+    public DeckWithCards(Deck deck, List<Card> cards){
+        this.id = deck.getId();
+        this.topic = deck.getTopic();
+        this.title = deck.getTitle();
+        this.description = deck.getDescription();
+        this.imgUrl = deck.getImgUrl();
+        this.cards = cards;
+    }
 
     public DeckWithCards(long id, String topic, String title, String description, String imgUrl, List<Card> cards) {
         this.id = id;

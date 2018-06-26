@@ -25,6 +25,9 @@ public interface DeckDAO {
     @Query("SELECT * FROM Deck WHERE id = :deckId")
     LiveData<Deck> getDeck(long deckId);
 
+    @Query("SELECT * FROM Deck WHERE title = :title")
+    LiveData<Deck> getDeckWithTitle(String title);
+
     @Query("SELECT * FROM Deck WHERE id = :deckId")
     LiveData<DeckWithCards> getDeckWithCards(long deckId);
 

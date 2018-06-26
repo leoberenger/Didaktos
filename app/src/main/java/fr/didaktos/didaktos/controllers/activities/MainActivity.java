@@ -37,6 +37,7 @@ public class MainActivity  extends AppCompatActivity
     private long deckId = -1;
     private DeckViewModel deckViewModel;
     private ArrayList<DeckWithCards> deckArrayList;
+    private DeckWithCards deck;
 
     @BindView(R.id.toolbar) Toolbar mToolbar;
 
@@ -80,7 +81,9 @@ public class MainActivity  extends AppCompatActivity
                 return true;
 
             case R.id.menu_edit:
-                //getDeckToEdit(deckId);
+                Intent intentEdit = new Intent(this, EditionActivity.class);
+                intentEdit.putExtra(DeckWithCards.DECK_KEY, deck);
+                startActivity(intentEdit);
                 return true;
 
             case R.id.menu_stats:
@@ -128,6 +131,8 @@ public class MainActivity  extends AppCompatActivity
     }
 
     private void configureAndShowDetailFragment (DeckWithCards deck){
+
+        this.deck = deck;
 
         DetailFragment fragment = (DetailFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.fragment_detail_layout);

@@ -29,6 +29,10 @@ public class DeckDataRepository {
         return this.deckDAO.getDeck(deckId);
     }
 
+    public LiveData<Deck> getDeckWithTitle(String title){
+        return this.deckDAO.getDeckWithTitle(title);
+    }
+
     public LiveData<DeckWithCards> getDeckWithCards(long deckId){
         return this.deckDAO.getDeckWithCards(deckId);
     }
