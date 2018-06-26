@@ -1,14 +1,18 @@
 package fr.didaktos.didaktos.controllers.activities.learn;
 
+import android.support.design.widget.FloatingActionButton;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import fr.didaktos.didaktos.R;
 
 public class MemorizeActivity extends BaseLearnActivity implements View.OnClickListener {
 
     private Button answerBtn;
+    private TextView answer;
 
     @Override
     protected View getValueLayout() {
@@ -16,24 +20,31 @@ public class MemorizeActivity extends BaseLearnActivity implements View.OnClickL
     }
 
     @Override
-    protected int getCardNumber() {
-        return 0;
-    }
-
-    @Override
     protected void configureAnswer() {
         answerBtn = (Button)findViewById(R.id.memorize_answer_btn);
         answerBtn.setOnClickListener(this);
+
+        nextFab.setOnClickListener(this);
+
+        answer = (TextView)findViewById(R.id.memorize_answer_txt);
+        answer.setText(deck.getCards().get(cardNumber).getValue());
+
+        answerBtn.setVisibility(View.VISIBLE);
+        answer.setVisibility(View.INVISIBLE);
+        nextFab.setVisibility(View.INVISIBLE);
     }
 
     @Override
     public void onClick(View v) {
-        answerBtn.setVisibility(View.INVISIBLE);
-
-        TextView answer = (TextView)findViewById(R.id.memorize_answer_txt);
-        answer.setText(deck.getCards().get(0).getValue());
-        answer.setVisibility(View.VISIBLE);
-
-        nextFab.setVisibility(View.VISIBLE);
+        switch (v.getId()){
+            case R.id.memorize_answer_btn :
+                answerBtn.setVisibility(View.INVISIBLE);
+                answer.setVisibility(View.VISIBLE);
+                nextFab.setVisibility(View.VISIBLE);
+                break;
+            case R.id.fab:
+                showNextCard();
+                break;
+        }
     }
 }

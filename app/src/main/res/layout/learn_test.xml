@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -12,13 +12,22 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:hint="@string/test_answer_hint"
-        android:inputType="text"/>
+        android:inputType="text"
+        android:layout_centerInParent="true"/>
 
     <Button
         android:id="@+id/test_check"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/test_check"
+        android:layout_below="@+id/test_answer"
         android:layout_marginTop="@dimen/quiz_btn_height"/>
 
-</FrameLayout>
+    <TextView
+        android:id="@+id/test_answer_txt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/test_answer"
+        android:layout_marginTop="@dimen/quiz_btn_height"/>
+
+</RelativeLayout>

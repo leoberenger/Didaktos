@@ -11,20 +11,22 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.Random;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.didaktos.didaktos.R;
+import fr.didaktos.didaktos.models.Card;
 import fr.didaktos.didaktos.models.DeckWithCards;
 
 public abstract class BaseLearnActivity extends AppCompatActivity {
 
     protected abstract View getValueLayout();
-    protected abstract int getCardNumber();
     protected abstract void configureAnswer();
     DeckWithCards deck;
+    int cardNumber;
 
     @BindView(R.id.activity_learn_toolbar) Toolbar mToolbar;
     @BindView(R.id.question) TextView questionTextView;
@@ -43,10 +45,12 @@ public abstract class BaseLearnActivity extends AppCompatActivity {
             deck = getIntent().getParcelableExtra(DeckWithCards.DECK_KEY);
         }
 
+        cardNumber = (deck.getCards().size())-1;
+
         this.configureToolbar();
         this.configureBottomNavigation();
         valueFrameLayout.addView(getValueLayout());
-        this.configureQuestion(deck.getCards().get(getCardNumber()).getKey());
+        this.configureQuestion();
         this.configureAnswer();
 
     }
@@ -86,8 +90,9 @@ public abstract class BaseLearnActivity extends AppCompatActivity {
         }
     };
 
-    private void configureQuestion(String q){
-        questionTextView.setText(q);
+    protected void configureQuestion(){
+        String question = deck.getCards().get(cardNumber).getKey();
+        questionTextView.setText(question);
     }
 
     static void shuffleArray(String[] ar)
@@ -101,5 +106,17 @@ public abstract class BaseLearnActivity extends AppCompatActivity {
             ar[index] = ar[i];
             ar[i] = a;
         }
+    }
+
+    protected void showNextCard(){
+        if (cardNumber > 0){
+            cardNumber--;
+            configureQuestion();
+            configureAnswer();
+        }else {
+            Toast.makeText(this, "End of the deck", Toast.LENGTH_LONG).show();
+        }
+
+
     }
 }
