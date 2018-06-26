@@ -11,6 +11,7 @@ import android.widget.TextView;
 import org.w3c.dom.Text;
 
 import fr.didaktos.didaktos.R;
+import fr.didaktos.didaktos.models.Card;
 
 public class TestActivity extends BaseLearnActivity implements View.OnClickListener{
 
@@ -54,10 +55,12 @@ public class TestActivity extends BaseLearnActivity implements View.OnClickListe
 
                 if(answerEditText.getText().toString().equals(correctAnswer)){
                     answerEditText.setBackgroundColor(Color.GREEN);
+                    deck.getCards().get(cardNumber).setStatus(2);
                 }else {
                     answerEditText.setBackgroundColor(Color.RED);
                     answerTextView.setVisibility(View.VISIBLE);
                     answerTextView.setText(correctAnswer);
+                    deck.getCards().get(cardNumber).setStatus(0);
                 }
 
                 break;

@@ -55,8 +55,10 @@ public class QuizActivity extends BaseLearnActivity implements View.OnClickListe
                 for(Button button : buttons){
                     if(button.getText().toString().equals(deck.getCards().get(cardNumber).getValue())){
                         button.setBackgroundColor(Color.GREEN);
+                        deck.getCards().get(cardNumber).setStatus(1);
                     }else {
                         button.setBackgroundColor(Color.RED);
+                        deck.getCards().get(cardNumber).setStatus(0);
                     }
                 }
                 nextFab.setVisibility(View.VISIBLE);

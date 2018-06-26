@@ -94,6 +94,8 @@ public abstract class BaseLearnActivity extends AppCompatActivity {
     };
 
     protected void configureQuestion(){
+        Log.e(TAG, "after card2Status = "+ deck.getCards().get(2).getStatus());
+
         String question = deck.getCards().get(cardNumber).getKey();
         questionTextView.setText(question);
     }
