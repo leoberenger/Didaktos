@@ -2,6 +2,7 @@ package fr.didaktos.didaktos.controllers.activities.learn;
 
 import android.graphics.Color;
 import android.support.design.widget.FloatingActionButton;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
@@ -62,7 +63,11 @@ public class QuizActivity extends BaseLearnActivity implements View.OnClickListe
                 break;
 
             case R.id.fab :
-                showNextCard();
+                if(cardNumber>0){
+                    showNextCard();
+                }else{
+                    endOfDeck();
+                }
                 break;
         }
     }

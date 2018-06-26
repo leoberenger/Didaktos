@@ -63,7 +63,11 @@ public class TestActivity extends BaseLearnActivity implements View.OnClickListe
                 break;
 
             case R.id.fab:
-                showNextCard();
+                if(cardNumber>0){
+                    showNextCard();
+                }else{
+                    endOfDeck();
+                }
                 break;
         }
     }

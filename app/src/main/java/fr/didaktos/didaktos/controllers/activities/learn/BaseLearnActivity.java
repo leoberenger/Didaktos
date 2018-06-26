@@ -7,6 +7,7 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -23,10 +24,13 @@ import fr.didaktos.didaktos.models.DeckWithCards;
 
 public abstract class BaseLearnActivity extends AppCompatActivity {
 
+    String TAG = "BaseActivity";
+
     protected abstract View getValueLayout();
     protected abstract void configureAnswer();
-    DeckWithCards deck;
-    int cardNumber;
+    protected DeckWithCards deck;
+    protected int cardNumber;
+
 
     @BindView(R.id.activity_learn_toolbar) Toolbar mToolbar;
     @BindView(R.id.question) TextView questionTextView;
@@ -43,16 +47,15 @@ public abstract class BaseLearnActivity extends AppCompatActivity {
         //retrieve deck
         if(getIntent().getParcelableExtra(DeckWithCards.DECK_KEY) != null){
             deck = getIntent().getParcelableExtra(DeckWithCards.DECK_KEY);
-        }
 
-        cardNumber = (deck.getCards().size())-1;
+            //Default card number = deck size
+            cardNumber = deck.getCards().size();
+        }
 
         this.configureToolbar();
         this.configureBottomNavigation();
         valueFrameLayout.addView(getValueLayout());
-        this.configureQuestion();
-        this.configureAnswer();
-
+        this.showNextCard();
     }
 
     private void configureToolbar(){
@@ -109,14 +112,21 @@ public abstract class BaseLearnActivity extends AppCompatActivity {
     }
 
     protected void showNextCard(){
-        if (cardNumber > 0){
-            cardNumber--;
+        int i = cardNumber-1;
+        while(cardNumber >= 0 && deck.getCards().get(i).getStatus() == 2){
+            i--;
+        }
+        cardNumber = i;
+
+        if(cardNumber >= 0){
             configureQuestion();
             configureAnswer();
-        }else {
-            Toast.makeText(this, "End of the deck", Toast.LENGTH_LONG).show();
+        }else{
+            endOfDeck();
         }
+    }
 
-
+    protected void endOfDeck(){
+        Toast.makeText(this, "End of the deck", Toast.LENGTH_LONG).show();
     }
 }

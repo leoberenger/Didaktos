@@ -11,6 +11,8 @@ import fr.didaktos.didaktos.R;
 
 public class MemorizeActivity extends BaseLearnActivity implements View.OnClickListener {
 
+    private String TAG = "Memorize Activity";
+
     private Button answerBtn;
     private TextView answer;
 
@@ -34,6 +36,7 @@ public class MemorizeActivity extends BaseLearnActivity implements View.OnClickL
         nextFab.setVisibility(View.INVISIBLE);
     }
 
+
     @Override
     public void onClick(View v) {
         switch (v.getId()){
@@ -42,8 +45,13 @@ public class MemorizeActivity extends BaseLearnActivity implements View.OnClickL
                 answer.setVisibility(View.VISIBLE);
                 nextFab.setVisibility(View.VISIBLE);
                 break;
+
             case R.id.fab:
-                showNextCard();
+                if(cardNumber>0){
+                    showNextCard();
+                }else{
+                    endOfDeck();
+                }
                 break;
         }
     }
