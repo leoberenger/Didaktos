@@ -110,20 +110,22 @@ public class EditionFragment extends Fragment {
 
                 if(topic.equals("")){
                     Toast.makeText(getContext(), "No Topic entered", Toast.LENGTH_LONG).show();
-
                 }else if(title.equals("")){
                     Toast.makeText(getContext(), "No Title entered", Toast.LENGTH_LONG).show();
                 }else{
                     //FOR EDITION
                     if(isEditionMode){
-                        deckEdited = deck;
-
+                        deckEdited = new DeckWithCards();
+                        deckEdited.setId(deck.getId());
+                        Log.e(TAG, "deck updated id = " + deckEdited.getId());
                         deckEdited.setTopic(topic);
                         deckEdited.setTitle(title);
                         deckEdited.setDescription(description);
+                        deckEdited.setImgUrl(deck.getImgUrl());
 
                         ArrayList<Card> cardsEdited = new ArrayList<>(deck.getCards());
                         for(int i = 0; i<4; i++) {
+                            cardsEdited.get(i).setDeckId(deck.getId());
                             cardsEdited.get(i).setKey(keys[i]);
                             cardsEdited.get(i).setValue(values[i]);
                             cardsEdited.get(i).setStatus(0);
@@ -143,6 +145,7 @@ public class EditionFragment extends Fragment {
                         }
                         deckEdited = new DeckWithCards(newDeck, newCards);
                     }
+
                     mCallback.onDeckEdited(deckEdited);
                 }
             }
@@ -150,6 +153,10 @@ public class EditionFragment extends Fragment {
     }
 
     private void showDeckCurrentValues(DeckWithCards d){
+
+        titleEditText.setText(d.getTitle());
+        topicEditText.setText(d.getTopic());
+        descriptionEditText.setText(d.getDescription());
 
         for(int i = 0; i<d.getCards().size(); i++) {
             //Get and show Keys
@@ -159,7 +166,6 @@ public class EditionFragment extends Fragment {
             //Get and show Values
             String cardValue = d.getCards().get(i).getValue();
             valueEditTexts[i].setText(cardValue);
-
         }
         /*
         Glide.with(this)

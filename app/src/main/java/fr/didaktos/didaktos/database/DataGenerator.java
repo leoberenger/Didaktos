@@ -44,7 +44,6 @@ public class DataGenerator {
         Card card9 = new Card(2, "Triangles imbriqués", "Thalès", 0);
         Card card10 = new Card(2, "Droites parallèles", "Réciproque Thalès", 0);
         Card card11 = new Card(2, "Angle droit", "Réciproque Pythagore", 0);
-        Card card12 = new Card(2, "112358", "Fibonnacci", 0);
 
         cards.add(card0);
         cards.add(card1);
@@ -58,19 +57,8 @@ public class DataGenerator {
         cards.add(card9);
         cards.add(card10);
         cards.add(card11);
-        cards.add(card12);
 
         return cards;
-/*
-        String [] deck0Keys = {"eat", "drink", "sleep", "study", "work",
-                "travel", "think", "ask", "leave", "speak"};
-        String [] deck0Values = {"manger", "boire", "dormir", "étudier", "travailler",
-                "voyager", "penser", "demander", "partir", "parler"};
-        String [] deck1Keys = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10" };
-        String [] deck1Values = {"Hydrogène", "Hélium", "Lithium", "Béryllium", "Bore",
-                "Carbone", "Azote", "Oxygène", "Fluor", "Néon"};
-*/
-
     }
 
 }
