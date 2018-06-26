@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -35,6 +36,7 @@ public class MainActivity  extends AppCompatActivity
 
     private long deckId = -1;
     private DeckViewModel deckViewModel;
+    private ArrayList<DeckWithCards> deckArrayList;
 
     @BindView(R.id.toolbar) Toolbar mToolbar;
 
@@ -82,7 +84,9 @@ public class MainActivity  extends AppCompatActivity
                 return true;
 
             case R.id.menu_stats:
-                //
+                Intent intentStats = new Intent(getApplicationContext(), StatsActivity.class );
+                intentStats.putParcelableArrayListExtra(DeckWithCards.DECKS_KEY, deckArrayList);
+                startActivity(intentStats);
                 return true;
 
             default:
@@ -103,8 +107,7 @@ public class MainActivity  extends AppCompatActivity
         MainFragment mainFragment = (MainFragment) getSupportFragmentManager().findFragmentById(R.id.decks_recycler_view);
 
         Bundle bundle = new Bundle();
-        ArrayList<DeckWithCards> deckArrayList = new ArrayList<>(decks);
-
+        deckArrayList = new ArrayList<>(decks);
         bundle.putParcelableArrayList(DeckWithCards.DECKS_KEY, deckArrayList);
 
         if (mainFragment == null) {

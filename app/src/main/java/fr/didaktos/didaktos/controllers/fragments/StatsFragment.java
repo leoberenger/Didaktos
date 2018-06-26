@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
@@ -21,11 +22,12 @@ import fr.didaktos.didaktos.R;
 import fr.didaktos.didaktos.models.DeckWithCards;
 import fr.didaktos.didaktos.utils.ItemClickSupport;
 import fr.didaktos.didaktos.views.DecksRecyclerAdapter;
+import fr.didaktos.didaktos.views.DecksStatsRecyclerAdapter;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class MainFragment extends Fragment {
+public class StatsFragment extends Fragment {
 
     String TAG = "Main Fragment";
 
@@ -33,7 +35,7 @@ public class MainFragment extends Fragment {
     private OnDecksListSelectedListener mCallback;
 
     public interface OnDecksListSelectedListener{
-        void onDeckSelected(long deckId);
+        void onDeckSelected(DeckWithCards deck);
     }
 
     //FOR DATA
@@ -43,9 +45,10 @@ public class MainFragment extends Fragment {
 
     // FOR DESIGN
     @BindView(R.id.decks_recycler_view) RecyclerView recyclerView;
-    private DecksRecyclerAdapter adapter;
+    private DecksStatsRecyclerAdapter adapter;
 
-    public MainFragment() {
+
+    public StatsFragment() {
         // Required empty public constructor
     }
 
@@ -75,16 +78,25 @@ public class MainFragment extends Fragment {
 
     private void configureRecyclerView(){
         this.decks = new ArrayList<>();
-        this.adapter = new DecksRecyclerAdapter(this.decks, Glide.with(this));
+        this.adapter = new DecksStatsRecyclerAdapter(this.decks, Glide.with(this));
         this.recyclerView.setAdapter(this.adapter);
         this.recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
     }
 
     private void configureOnClickRecyclerView(){
-        ItemClickSupport.addTo(recyclerView, R.layout.decks_recycler_view_item)
+        ItemClickSupport.addTo(recyclerView, R.layout.decks_stats_recycler_view_item)
                 .setOnItemClickListener((recyclerView, position, v) -> {
                     deckId = adapter.getResult(position).getId();
-                    mCallback.onDeckSelected(deckId);
+
+                    DeckWithCards deckSelected = new DeckWithCards();
+
+                    for(int i = 0; i<decks.size(); i++){
+                        if (decks.get(i).getId() == deckId){
+                            deckSelected = decks.get(i);
+                        }
+                    }
+
+                    mCallback.onDeckSelected(deckSelected);
                 });
     }
 
@@ -114,4 +126,5 @@ public class MainFragment extends Fragment {
                     + " must implement OnDecksListSelectedListener");
         }
     }
+
 }

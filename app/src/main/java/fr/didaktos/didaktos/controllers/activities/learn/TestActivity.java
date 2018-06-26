@@ -68,9 +68,12 @@ public class TestActivity extends BaseLearnActivity implements View.OnClickListe
 
                 if(answerEditText.getText().toString().equals(correctAnswer)){
                     answerEditText.setBackgroundColor(Color.GREEN);
-                    deck.getCards().get(cardNumber).setStatus(2);
+
+                    Card successfulCard = deck.getCards().get(cardNumber);
+                    successfulCard.setStatus(2);
+                    successfulCard.setDeckId(deck.getId());
                     //Update status in database
-                    this.deckViewModel.updateCard(deck.getCards().get(cardNumber));
+                    this.deckViewModel.updateCard(successfulCard);
                 }else {
                     answerEditText.setBackgroundColor(Color.RED);
                     answerTextView.setVisibility(View.VISIBLE);
