@@ -1,5 +1,6 @@
 package fr.didaktos.didaktos.controllers.activities.learn;
 
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -19,8 +20,12 @@ import java.util.Random;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.didaktos.didaktos.R;
+import fr.didaktos.didaktos.injections.Injection;
+import fr.didaktos.didaktos.injections.ViewModelFactory;
 import fr.didaktos.didaktos.models.Card;
+import fr.didaktos.didaktos.models.Deck;
 import fr.didaktos.didaktos.models.DeckWithCards;
+import fr.didaktos.didaktos.views.DeckViewModel;
 
 public abstract class BaseLearnActivity extends AppCompatActivity {
 
@@ -30,7 +35,6 @@ public abstract class BaseLearnActivity extends AppCompatActivity {
     protected abstract void configureAnswer();
     protected DeckWithCards deck;
     protected int cardNumber;
-
 
     @BindView(R.id.activity_learn_toolbar) Toolbar mToolbar;
     @BindView(R.id.question) TextView questionTextView;
@@ -94,7 +98,6 @@ public abstract class BaseLearnActivity extends AppCompatActivity {
     };
 
     protected void configureQuestion(){
-        Log.e(TAG, "after card2Status = "+ deck.getCards().get(2).getStatus());
 
         String question = deck.getCards().get(cardNumber).getKey();
         questionTextView.setText(question);
@@ -131,4 +134,6 @@ public abstract class BaseLearnActivity extends AppCompatActivity {
     protected void endOfDeck(){
         Toast.makeText(this, "End of the deck", Toast.LENGTH_LONG).show();
     }
+
+
 }
