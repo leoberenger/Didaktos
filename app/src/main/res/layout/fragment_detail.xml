@@ -143,8 +143,8 @@
 
         <Button
             android:id="@+id/detail_btn"
-            android:layout_width="@dimen/quiz_btn_width"
-            android:layout_height="@dimen/quiz_btn_height"
+            android:layout_width="@dimen/btn_width"
+            android:layout_height="@dimen/btn_height"
             android:background="@color/colorAccent"
             android:textSize="@dimen/text_medium"
             android:text="@string/detail_btn"/>

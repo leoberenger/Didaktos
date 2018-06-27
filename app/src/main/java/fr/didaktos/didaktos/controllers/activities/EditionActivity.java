@@ -4,11 +4,13 @@ import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.widget.Toast;
 
 import java.util.List;
 
+import butterknife.BindView;
 import fr.didaktos.didaktos.R;
 import fr.didaktos.didaktos.controllers.fragments.EditionFragment;
 import fr.didaktos.didaktos.injections.Injection;
@@ -28,12 +30,15 @@ public class EditionActivity extends AppCompatActivity
     private DeckViewModel viewModel;
     private DeckWithCards deck;
 
+    @BindView(R.id.toolbar) Toolbar mToolbar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edition);
 
         this.configureViewModel();
+        this.configureToolbar();
 
         //if Edit, retrieve deck
         if(getIntent().getParcelableExtra(DeckWithCards.DECK_KEY) != null){
@@ -42,6 +47,10 @@ public class EditionActivity extends AppCompatActivity
         }
 
         this.viewModel.getAllDecks().observe(this,this::configureAndShowEditionFragment);
+    }
+
+    private void configureToolbar(){
+        setSupportActionBar(mToolbar);
     }
 
     private void  configureAndShowEditionFragment(List<Deck> decks){

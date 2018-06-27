@@ -1,10 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".controllers.activities.EditionActivity">
+    tools:context="fr.didaktos.didaktos.controllers.activities.EditionActivity"
+    android:orientation="vertical">
+
+    <!-- Import toolbar -->
+    <include layout="@layout/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/toolbar_height"/>
 
     <RelativeLayout
         android:id="@+id/activity_edition_fragment"
@@ -12,4 +18,4 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
-</android.support.constraint.ConstraintLayout>
+</LinearLayout>
