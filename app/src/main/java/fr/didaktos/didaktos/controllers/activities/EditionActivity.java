@@ -98,7 +98,6 @@ public class EditionActivity extends AppCompatActivity
         this.viewModel.init();
     }
 
-
     private void updateDeck(DeckWithCards deck){
         //Update Deck
         Deck deckToUpdate = new Deck(deck.getId(), deck.getTopic(), deck.getTitle(), deck.getDescription(), deck.getImgUrl());

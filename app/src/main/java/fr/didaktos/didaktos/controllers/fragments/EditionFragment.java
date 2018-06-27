@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -46,29 +47,20 @@ public class EditionFragment extends Fragment {
     private boolean isEditionMode;
     private DeckWithCards deck;
     private DeckWithCards deckEdited;
-    private EditText [] keyEditTexts;
-    private EditText [] valueEditTexts;
     private String title;
     private String topic;
     private String description;
+    private int totalRows;
+    private int currentRowsNb;
     private String [] keys;
     private String [] values;
     private long nextDeckId;
 
-
-
+    @BindView(R.id.edition_table) LinearLayout tableLayout;
     @BindView(R.id.edition_button) Button editionButton;
     @BindView(R.id.edition_topic) EditText topicEditText;
     @BindView(R.id.edition_title) EditText titleEditText;
     @BindView(R.id.edition_description) EditText descriptionEditText;
-    @BindView(R.id.edition_key_0_edit_text) EditText keyEditText0;
-    @BindView(R.id.edition_key_1_edit_text) EditText keyEditText1;
-    @BindView(R.id.edition_key_2_edit_text) EditText keyEditText2;
-    @BindView(R.id.edition_key_3_edit_text) EditText keyEditText3;
-    @BindView(R.id.edition_value_0_edit_text) EditText valueEditText0;
-    @BindView(R.id.edition_value_1_edit_text) EditText valueEditText1;
-    @BindView(R.id.edition_value_2_edit_text) EditText valueEditText2;
-    @BindView(R.id.edition_value_3_edit_text) EditText valueEditText3;
 
     public EditionFragment() {
         // Required empty public constructor
@@ -82,11 +74,14 @@ public class EditionFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_edition, container, false);
         ButterKnife.bind(this, view);
 
-        keyEditTexts = new EditText[]{keyEditText0, keyEditText1, keyEditText2, keyEditText3};
-        valueEditTexts = new EditText[]{valueEditText0, valueEditText1, valueEditText2, valueEditText3};
-        keys = new String[keyEditTexts.length];
-        values = new String[valueEditTexts.length];
+        //Create Rows
+        totalRows = 4;
+        currentRowsNb = 0;
+        for(int i = 0; i< totalRows; i++){
+            this.createNewRow();
+        }
 
+        //Retrieve data
         isEditionMode = getArguments().getBoolean(EditionActivity.EDITION_KEY);
 
         if(isEditionMode) {
@@ -97,7 +92,6 @@ public class EditionFragment extends Fragment {
         }
 
         this.configureEditionButton();
-
         return view;
     }
 
@@ -117,7 +111,6 @@ public class EditionFragment extends Fragment {
                     if(isEditionMode){
                         deckEdited = new DeckWithCards();
                         deckEdited.setId(deck.getId());
-                        Log.e(TAG, "deck updated id = " + deckEdited.getId());
                         deckEdited.setTopic(topic);
                         deckEdited.setTitle(title);
                         deckEdited.setDescription(description);
@@ -161,11 +154,13 @@ public class EditionFragment extends Fragment {
         for(int i = 0; i<d.getCards().size(); i++) {
             //Get and show Keys
             String cardKey = d.getCards().get(i).getKey();
-            keyEditTexts[i].setText(cardKey);
+            EditText key =  (EditText)tableLayout.findViewWithTag("key"+i);
+            key.setText(cardKey);
 
             //Get and show Values
             String cardValue = d.getCards().get(i).getValue();
-            valueEditTexts[i].setText(cardValue);
+            EditText value =  (EditText)tableLayout.findViewWithTag("value"+i);
+            value.setText(cardValue);
         }
         /*
         Glide.with(this)
@@ -181,10 +176,34 @@ public class EditionFragment extends Fragment {
         title = titleEditText.getText().toString();
         description = descriptionEditText.getText().toString();
 
-        for(int i = 0; i<keys.length ;i++){
-            keys[i] = keyEditTexts[i].getText().toString();
-            values[i] = valueEditTexts[i].getText().toString();
+        keys = new String [currentRowsNb];
+        values = new String[currentRowsNb];
+
+        for(int i = 0; i<currentRowsNb ;i++){
+            EditText key =  (EditText)tableLayout.findViewWithTag("key"+i);
+            EditText value =  (EditText)tableLayout.findViewWithTag("value"+i);
+            keys[i] = key.getText().toString();
+            values[i] = value.getText().toString();
         }
+
+    }
+
+    private void createNewRow(){
+        View row = getLayoutInflater().inflate(R.layout.edition_row, null);
+
+        TextView id = (TextView)row.findViewById(R.id.edition_id);
+        String rowId = String.valueOf(currentRowsNb+1);
+        id.setText(rowId);
+
+        EditText key = (EditText)row.findViewById(R.id.edition_key);
+        key.setTag("key"+currentRowsNb);
+
+        EditText valueEditText = (EditText)row.findViewById(R.id.edition_value);
+        valueEditText.setTag("value"+currentRowsNb);
+
+        currentRowsNb++;
+
+        tableLayout.addView(row);
     }
 
     // -------------------------

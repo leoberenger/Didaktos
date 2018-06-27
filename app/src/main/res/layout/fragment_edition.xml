@@ -64,146 +64,20 @@
 
     </LinearLayout>
 
+    <!-- Layout for rows -->
     <LinearLayout
+        android:id="@+id/edition_table"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.5"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:text="@string/one"/>
-
-        <EditText
-            android:id="@+id/edition_key_0_edit_text"
-            android:layout_width="0dp"
-            android:layout_weight="2"
-            android:layout_height="match_parent"
-            android:hint="@string/key"
-            android:gravity="center"
-            android:inputType="text"/>
-
-        <EditText
-            android:id="@+id/edition_value_0_edit_text"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="match_parent"
-            android:hint="@string/value"
-            android:gravity="center"
-            android:inputType="text"/>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.5"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:text="@string/two"/>
-
-        <EditText
-            android:id="@+id/edition_key_1_edit_text"
-            android:layout_width="0dp"
-            android:layout_weight="2"
-            android:layout_height="match_parent"
-            android:hint="@string/key"
-            android:gravity="center"
-            android:inputType="text"/>
-
-        <EditText
-            android:id="@+id/edition_value_1_edit_text"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="match_parent"
-            android:hint="@string/value"
-            android:gravity="center"
-            android:inputType="text"/>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.5"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:text="@string/three"/>
-
-        <EditText
-            android:id="@+id/edition_key_2_edit_text"
-            android:layout_width="0dp"
-            android:layout_weight="2"
-            android:layout_height="match_parent"
-            android:hint="@string/key"
-            android:gravity="center"
-            android:inputType="text"/>
-
-        <EditText
-            android:id="@+id/edition_value_2_edit_text"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="match_parent"
-            android:hint="@string/value"
-            android:gravity="center"
-            android:inputType="text"/>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.5"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:text="@string/four"/>
-
-        <EditText
-            android:id="@+id/edition_key_3_edit_text"
-            android:layout_width="0dp"
-            android:layout_weight="2"
-            android:layout_height="match_parent"
-            android:hint="@string/key"
-            android:gravity="center"
-            android:inputType="text"/>
-
-        <EditText
-            android:id="@+id/edition_value_3_edit_text"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="match_parent"
-            android:hint="@string/value"
-            android:gravity="center"
-            android:inputType="text"/>
-
-    </LinearLayout>
-
-
+        android:layout_weight="8"
+        android:orientation="vertical"/>
 
     <!-- Button Update/Create -->
     <Button
         android:id="@+id/edition_button"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_weight="0.3"
         android:textColor="#FFF"
         android:background="@color/colorPrimary"
         android:textStyle="bold"
