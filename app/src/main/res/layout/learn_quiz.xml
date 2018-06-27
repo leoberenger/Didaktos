@@ -5,23 +5,33 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".controllers.activities.learn.QuizActivity"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:gravity="center">
 
     <Button
         android:id="@+id/quiz_answer_0_btn"
         android:layout_width="@dimen/quiz_btn_width"
-        android:layout_height="@dimen/quiz_btn_height"/>
+        android:layout_height="@dimen/quiz_btn_height"
+        android:textSize="@dimen/text_large"
+        android:textColor="@android:color/white"
+        android:background="@drawable/card_verso_quiz" />
 
     <Button
         android:id="@+id/quiz_answer_1_btn"
         android:layout_width="@dimen/quiz_btn_width"
         android:layout_height="@dimen/quiz_btn_height"
+        android:textSize="@dimen/text_large"
+        android:textColor="@android:color/white"
+        android:background="@drawable/card_verso_quiz"
         android:layout_below="@id/quiz_answer_0_btn"/>
 
     <Button
         android:id="@+id/quiz_answer_2_btn"
         android:layout_width="@dimen/quiz_btn_width"
         android:layout_height="@dimen/quiz_btn_height"
+        android:textSize="@dimen/text_large"
+        android:textColor="@android:color/white"
+        android:background="@drawable/card_verso_quiz"
         android:layout_toEndOf="@id/quiz_answer_0_btn"
         android:layout_alignTop="@id/quiz_answer_0_btn"/>
 
@@ -29,6 +39,9 @@
         android:id="@+id/quiz_answer_3_btn"
         android:layout_width="@dimen/quiz_btn_width"
         android:layout_height="@dimen/quiz_btn_height"
+        android:textSize="@dimen/text_large"
+        android:textColor="@android:color/white"
+        android:background="@drawable/card_verso_quiz"
         android:layout_below="@id/quiz_answer_2_btn"
         android:layout_toEndOf="@id/quiz_answer_1_btn"/>
 

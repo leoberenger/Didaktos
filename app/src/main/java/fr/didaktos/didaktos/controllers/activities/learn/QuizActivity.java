@@ -36,7 +36,6 @@ public class QuizActivity extends BaseLearnActivity implements View.OnClickListe
         buttons[3] = (Button) findViewById(R.id.quiz_answer_3_btn);
 
         for (int i = 0; i<buttons.length; i++){
-            buttons[i].setBackgroundColor(0);
             buttons[i].setOnClickListener(this);
             buttons[i].setText(answers[i]);
         }
@@ -54,10 +53,12 @@ public class QuizActivity extends BaseLearnActivity implements View.OnClickListe
 
                 for(Button button : buttons){
                     if(button.getText().toString().equals(deck.getCards().get(cardNumber).getValue())){
-                        button.setBackgroundColor(Color.GREEN);
+                        button.setBackgroundColor(Color.WHITE);
+                        button.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
                         deck.getCards().get(cardNumber).setStatus(1);
                     }else {
-                        button.setBackgroundColor(Color.RED);
+                        button.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+                        button.setTextColor(getResources().getColor(R.color.colorPrimary));
                         deck.getCards().get(cardNumber).setStatus(0);
                     }
                 }
@@ -66,7 +67,12 @@ public class QuizActivity extends BaseLearnActivity implements View.OnClickListe
 
             case R.id.fab :
                 if(cardNumber>0){
+                    for(Button button : buttons){
+                        button.setBackground(getResources().getDrawable(R.drawable.card_verso_quiz));
+                        button.setTextColor(Color.WHITE);
+                    }
                     showNextCard();
+
                 }else{
                     endOfDeck();
                 }

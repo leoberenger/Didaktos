@@ -14,54 +14,46 @@
         android:layout_height="@dimen/toolbar_height"
         android:id="@+id/activity_learn_toolbar"/>
 
-    <!-- Fragment Layout -->
     <LinearLayout
         android:id="@+id/activity_learn_frame_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/activity_learn_toolbar"
+        android:layout_above="@+id/navigation"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
-        android:layout_toStartOf="@id/navigation"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:background="@color/colorPrimary">
 
+        <!-- QUESTION -->
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:text="@string/learn_question"/>
 
             <TextView
                 android:id="@+id/question"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"/>
+                android:layout_width="@dimen/card_width"
+                android:layout_height="@dimen/card_height"
+                android:layout_centerInParent="true"
+                android:textSize="@dimen/text_xxlarge"
+                android:textColor="@color/colorPrimaryDark"
+                android:gravity="center"
+                android:background="@drawable/card"/>
 
         </RelativeLayout>
 
+        <!-- ANSWER -->
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:text="@string/learn_answer"/>
-
             <FrameLayout
                 android:id="@+id/fragment_base_empty_frame"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"/>
+                android:layout_width="@dimen/card_width"
+                android:layout_height="@dimen/card_height"
+                android:layout_centerHorizontal="true"/>
 
         </RelativeLayout>
 
