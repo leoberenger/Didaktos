@@ -1,12 +1,12 @@
 package fr.didaktos.didaktos.controllers.activities.learn;
 
-import android.arch.lifecycle.ViewModelProviders;
-import android.content.Intent;
-import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
@@ -20,21 +20,18 @@ import java.util.Random;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.didaktos.didaktos.R;
-import fr.didaktos.didaktos.injections.Injection;
-import fr.didaktos.didaktos.injections.ViewModelFactory;
-import fr.didaktos.didaktos.models.Card;
-import fr.didaktos.didaktos.models.Deck;
+import fr.didaktos.didaktos.controllers.fragments.MemorizeFragment;
 import fr.didaktos.didaktos.models.DeckWithCards;
-import fr.didaktos.didaktos.views.DeckViewModel;
 
-public abstract class BaseLearnActivity extends AppCompatActivity {
+public class LearnActivity extends AppCompatActivity
+    implements
+        View.OnClickListener,
+        MemorizeFragment.OnMemorizeAnswerListener {
 
-    String TAG = "BaseActivity";
+    String TAG = "LearnActivity";
 
-    protected abstract View getValueLayout();
-    protected abstract void configureAnswer();
-    protected DeckWithCards deck;
-    protected int cardNumber;
+    private DeckWithCards deck;
+    private int cardNumber;
 
     @BindView(R.id.activity_learn_toolbar) Toolbar mToolbar;
     @BindView(R.id.question) TextView questionTextView;
@@ -53,14 +50,22 @@ public abstract class BaseLearnActivity extends AppCompatActivity {
             deck = getIntent().getParcelableExtra(DeckWithCards.DECK_KEY);
 
             //Default card number = deck size
-            cardNumber = deck.getCards().size();
+            cardNumber = deck.getCards().size()-1;
         }
+
+        Bundle args = new Bundle();
+        args.putString(DeckWithCards.ANSWER_KEY, deck.getCards().get(cardNumber).getValue());
+        replaceCurrentFragment(new MemorizeFragment(), args);
 
         this.configureToolbar();
         this.configureBottomNavigation();
-        valueFrameLayout.addView(getValueLayout());
-        this.showNextCard();
+        this.configureNextFab();
+        this.configureQuestion();
     }
+
+    //---------------------------
+    //CONFIGURATION OF VIEW
+    //--------------------------
 
     private void configureToolbar(){
         setSupportActionBar(mToolbar);
@@ -76,31 +81,31 @@ public abstract class BaseLearnActivity extends AppCompatActivity {
 
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            Fragment fragment = null;
+            Bundle args = new Bundle();
+
             switch (item.getItemId()) {
                 case R.id.navigation_memorize:
-                    Intent intentMemorize = new Intent(getApplicationContext(), MemorizeActivity.class );
-                    intentMemorize.putExtra(DeckWithCards.DECK_KEY, deck);
-                    startActivity(intentMemorize);
-                    return true;
+                    fragment = new MemorizeFragment();
+                    args.putString(DeckWithCards.ANSWER_KEY, deck.getCards().get(cardNumber).getValue());
+                    break;
                 case R.id.navigation_quiz:
-                    Intent intentQuiz = new Intent(getApplicationContext(), QuizActivity.class );
-                    intentQuiz.putExtra(DeckWithCards.DECK_KEY, deck);
-                    startActivity(intentQuiz);
-                    return true;
+                    fragment = new MemorizeFragment();
+                    break;
                 case R.id.navigation_test:
-                    Intent intentTest = new Intent(getApplicationContext(), TestActivity.class );
-                    intentTest.putExtra(DeckWithCards.DECK_KEY, deck);
-                    startActivity(intentTest);
-                    return true;
+                    fragment = new MemorizeFragment();
+                    break;
             }
-            return false;
+            replaceCurrentFragment(fragment, args);
+            return true;
         }
     };
 
-    protected void configureQuestion(){
-
-        String question = deck.getCards().get(cardNumber).getKey();
-        questionTextView.setText(question);
+    private void replaceCurrentFragment(Fragment fragment, Bundle args){
+        fragment.setArguments(args);
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.fragment_base_empty_frame, fragment);
+        transaction.commit();
     }
 
     static void shuffleArray(String[] ar)
@@ -116,8 +121,46 @@ public abstract class BaseLearnActivity extends AppCompatActivity {
         }
     }
 
+    private void configureQuestion(){
+        String question = deck.getCards().get(cardNumber).getKey();
+        questionTextView.setText(question);
+    }
+
+    private void configureAnswer(){
+        Bundle args = new Bundle();
+        args.putString(DeckWithCards.ANSWER_KEY, deck.getCards().get(cardNumber).getValue());
+        replaceCurrentFragment(new MemorizeFragment(), args);
+    }
+
+    private void configureNextFab(){
+        nextFab.setOnClickListener(this);
+        nextFab.setVisibility(View.INVISIBLE);
+    }
+
+
     protected void showNextCard(){
-        int i = cardNumber-1;
+
+    }
+
+    protected void endOfDeck(){
+        Toast.makeText(this, "End of the deck", Toast.LENGTH_LONG).show();
+    }
+
+    //-----------------------------------
+    // CALLBACKS
+    //-----------------------------------
+
+    @Override
+    public void onAnswer() {
+        nextFab.setVisibility(View.VISIBLE);
+        cardNumber--;
+        Log.e(TAG, "memorize answered");
+    }
+
+    @Override
+    public void onClick(View v) {
+        Log.e(TAG, "fab clicked");
+        int i = cardNumber;
         while(cardNumber >= 0 && deck.getCards().get(i).getStatus() == 2){
             i--;
         }
@@ -130,10 +173,4 @@ public abstract class BaseLearnActivity extends AppCompatActivity {
             endOfDeck();
         }
     }
-
-    protected void endOfDeck(){
-        Toast.makeText(this, "End of the deck", Toast.LENGTH_LONG).show();
-    }
-
-
 }

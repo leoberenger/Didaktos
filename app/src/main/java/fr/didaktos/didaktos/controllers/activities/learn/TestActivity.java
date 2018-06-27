@@ -66,7 +66,7 @@ public class TestActivity extends BaseLearnActivity
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.fab:
+            case R.id.next_fab:
                 if (cardNumber > 0) {
                     showNextCard();
                 } else {

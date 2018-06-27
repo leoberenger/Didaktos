@@ -18,6 +18,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.didaktos.didaktos.R;
+import fr.didaktos.didaktos.controllers.activities.learn.LearnActivity;
 import fr.didaktos.didaktos.controllers.fragments.DetailFragment;
 import fr.didaktos.didaktos.controllers.fragments.MainFragment;
 import fr.didaktos.didaktos.database.DataGenerator;
@@ -71,8 +72,9 @@ public class MainActivity  extends AppCompatActivity
         switch (item.getItemId()){
 
             case R.id.menu_search:
-                //Intent intentSearch = new Intent(this, SearchActivity.class);
-                //startActivity(intentSearch);
+                Intent intentSearch = new Intent(this, LearnActivity.class);
+                intentSearch.putExtra(DeckWithCards.DECK_KEY, deck);
+                startActivity(intentSearch);
                 return true;
 
             case R.id.menu_add:

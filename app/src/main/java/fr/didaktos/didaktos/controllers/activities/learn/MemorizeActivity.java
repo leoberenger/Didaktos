@@ -46,7 +46,7 @@ public class MemorizeActivity extends BaseLearnActivity implements View.OnClickL
                 nextFab.setVisibility(View.VISIBLE);
                 break;
 
-            case R.id.fab:
+            case R.id.next_fab:
                 if(cardNumber>0){
                     showNextCard();
                 }else{

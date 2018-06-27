@@ -65,7 +65,7 @@ public class QuizActivity extends BaseLearnActivity implements View.OnClickListe
                 nextFab.setVisibility(View.VISIBLE);
                 break;
 
-            case R.id.fab :
+            case R.id.next_fab :
                 if(cardNumber>0){
                     for(Button button : buttons){
                         button.setBackground(getResources().getDrawable(R.drawable.card_verso_quiz));
