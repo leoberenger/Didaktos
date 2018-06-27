@@ -4,25 +4,22 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="20dip"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    android:background="@drawable/border">
 
-    <LinearLayout
+
+    <ImageView
+        android:id="@+id/decks_recycler_view_item_img"
         android:layout_width="0dp"
         android:layout_weight="1"
-        android:layout_height="match_parent">
-
-        <ImageView
-            android:id="@+id/decks_recycler_view_item_img"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-
-    </LinearLayout>
+        android:layout_height="match_parent" />
 
     <LinearLayout
         android:layout_width="0dp"
         android:layout_weight="2"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_marginStart="@dimen/margin_small">
 
         <TextView
             android:id="@+id/decks_recycler_view_item_topic"
@@ -40,14 +37,6 @@
             android:layout_weight="1"
             android:textSize="14sp"
             android:textColor="@android:color/black"/>
-
-        <TextView
-            android:id="@+id/decks_recycler_view_item_nbCards"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:textSize="14sp"
-            android:textColor="@android:color/darker_gray"/>
 
     </LinearLayout>
 </LinearLayout>

@@ -3,6 +3,10 @@
 
     <dimen name="toolbar_height">64dp</dimen>
 
+    <dimen name="text_large">22sp</dimen>
+    <dimen name="text_medium">16sp</dimen>
+    <dimen name="text_small">12sp</dimen>
+
 
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="activity_horizontal_margin">16dp</dimen>
@@ -11,4 +15,8 @@
     <dimen name="quiz_btn_width">100dp</dimen>
     <dimen name="quiz_btn_height">40dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
+
+    <dimen name="margin_small">10dp</dimen>
+    <dimen name="margin_medium">30dp</dimen>
+    <dimen name="margin_large">50dp</dimen>
 </resources>

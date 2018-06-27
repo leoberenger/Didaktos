@@ -10,8 +10,9 @@
 
     <!-- DETAIL -->
     <string name="detail_description">DESCRIPTION</string>
-    <string name="detail_examples">EXAMPLES</string>
-    <string name="detail_btn">LEARN NOW!</string>
+    <string name="detail_examples">EXEMPLES</string>
+    <string name="detail_nb_cards">NOMBRE DE CARTES</string>
+    <string name="detail_btn">APPRENDS !</string>
     <string name="title_activity_learn">LearnActivity</string>
 
     <!-- LEARN -->

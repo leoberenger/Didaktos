@@ -3,6 +3,7 @@ package fr.didaktos.didaktos.controllers.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -33,11 +34,14 @@ public class DetailFragment extends Fragment {
 
     //FOR DESIGN
     @BindView(R.id.detail_description) TextView textViewDescription;
+    @BindView(R.id.detail_nb_cards) TextView textViewNbCards;
     @BindView(R.id.detail_topic) TextView textViewTopic;
     @BindView(R.id.detail_title) TextView textViewTitle;
-    @BindView(R.id.detail_examples) TextView textViewExamples;
+    @BindView(R.id.detail_examples_0) TextView textViewExamples0;
+    @BindView(R.id.detail_examples_1) TextView textViewExamples1;
+    @BindView(R.id.detail_examples_2) TextView textViewExamples2;
+    @BindView(R.id.detail_examples_3) TextView textViewExamples3;
     @BindView(R.id.detail_img) ImageView imageViewDescription;
-    @BindView(R.id.detail_btn) Button button;
 
 
     public DetailFragment() {
@@ -71,15 +75,15 @@ public class DetailFragment extends Fragment {
         textViewTopic.setText(d.getTopic());
         textViewTitle.setText(d.getTitle());
         textViewDescription.setText(d.getDescription());
+        String nbCards = d.getCards().size() + " cartes";
+        textViewNbCards.setText(nbCards);
 
         //Examples
-        StringBuilder stringBuilder = new StringBuilder();
-        for (int i = 0; i<d.getCards().size(); i++){
-            String str = d.getCards().get(i).getKey() + "/" + d.getCards().get(i).getValue()+ "   ";
-            stringBuilder.append(str);
+        TextView [] examples = new TextView[]{textViewExamples0, textViewExamples1, textViewExamples2, textViewExamples3};
+        for (int i = 0; i<examples.length; i++){
+            String str = "- " + d.getCards().get(i).getKey() + " (" + d.getCards().get(i).getValue() + ")";
+            examples[i].setText(str);
         }
-        String examples = stringBuilder.toString();
-        textViewExamples.setText(examples);
     }
 
     @OnClick(R.id.detail_btn)
