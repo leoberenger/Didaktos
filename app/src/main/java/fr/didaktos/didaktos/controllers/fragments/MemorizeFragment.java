@@ -39,7 +39,8 @@ public class MemorizeFragment extends Fragment{
         View view = inflater.inflate(R.layout.learn_memorize, container, false);
         ButterKnife.bind(this, view);
 
-        this.configureAnswer(getArguments().getString(DeckWithCards.ANSWER_KEY));
+        String answer = getArguments().getString(DeckWithCards.ANSWER_KEY);
+        this.configureAnswer(answer);
 
         return view;
     }
@@ -63,7 +64,7 @@ public class MemorizeFragment extends Fragment{
     public void seeAnswer(View v) {
         answerBtn.setVisibility(View.INVISIBLE);
         answerText.setVisibility(View.VISIBLE);
-        mCallback.onAnswer();
+        mCallback.onMemorizeAnswer();
     }
 
 
@@ -72,7 +73,7 @@ public class MemorizeFragment extends Fragment{
     //-------------------
 
     public interface OnMemorizeAnswerListener {
-        void onAnswer();
+        void onMemorizeAnswer();
     }
 
     @Override

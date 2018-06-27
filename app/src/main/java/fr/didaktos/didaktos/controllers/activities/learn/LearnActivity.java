@@ -21,17 +21,20 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.didaktos.didaktos.R;
 import fr.didaktos.didaktos.controllers.fragments.MemorizeFragment;
+import fr.didaktos.didaktos.controllers.fragments.QuizFragment;
 import fr.didaktos.didaktos.models.DeckWithCards;
 
 public class LearnActivity extends AppCompatActivity
     implements
         View.OnClickListener,
-        MemorizeFragment.OnMemorizeAnswerListener {
+        MemorizeFragment.OnMemorizeAnswerListener,
+        QuizFragment.OnQuizAnswerListener{
 
     String TAG = "LearnActivity";
 
     private DeckWithCards deck;
     private int cardNumber;
+    private int currentFragment;
 
     @BindView(R.id.activity_learn_toolbar) Toolbar mToolbar;
     @BindView(R.id.question) TextView questionTextView;
@@ -90,7 +93,11 @@ public class LearnActivity extends AppCompatActivity
                     args.putString(DeckWithCards.ANSWER_KEY, deck.getCards().get(cardNumber).getValue());
                     break;
                 case R.id.navigation_quiz:
-                    fragment = new MemorizeFragment();
+                    fragment = new QuizFragment();
+                    args.putString(DeckWithCards.ANSWER_KEY, deck.getCards().get(cardNumber).getValue());
+                    String [] alternatives = {deck.getCards().get(0).getValue(), deck.getCards().get(1).getValue(),
+                            deck.getCards().get(2).getValue()};
+                    args.putStringArray(DeckWithCards.ALTERNATIVES_KEY, alternatives);
                     break;
                 case R.id.navigation_test:
                     fragment = new MemorizeFragment();
@@ -108,7 +115,7 @@ public class LearnActivity extends AppCompatActivity
         transaction.commit();
     }
 
-    static void shuffleArray(String[] ar)
+    public static void shuffleArray(String[] ar)
     {
         Random rnd = new Random();
         for (int i = ar.length - 1; i > 0; i--)
@@ -126,10 +133,26 @@ public class LearnActivity extends AppCompatActivity
         questionTextView.setText(question);
     }
 
-    private void configureAnswer(){
+    private void configureAnswer(int currentFragment){
         Bundle args = new Bundle();
-        args.putString(DeckWithCards.ANSWER_KEY, deck.getCards().get(cardNumber).getValue());
-        replaceCurrentFragment(new MemorizeFragment(), args);
+        Fragment fragment = null;
+        switch (currentFragment){
+            case 0: //MemoryFragment
+                fragment = new MemorizeFragment();
+                args.putString(DeckWithCards.ANSWER_KEY, deck.getCards().get(cardNumber).getValue());
+                break;
+            case 1: //Quiz Fragment
+                fragment = new QuizFragment();
+                args.putString(DeckWithCards.ANSWER_KEY, deck.getCards().get(cardNumber).getValue());
+                String [] alternatives = {deck.getCards().get(0).getValue(), deck.getCards().get(1).getValue(),
+                        deck.getCards().get(2).getValue()};
+                args.putStringArray(DeckWithCards.ALTERNATIVES_KEY, alternatives);
+                break;
+            case 2: //Test Fragment
+                break;
+            }
+        replaceCurrentFragment(fragment, args);
+
     }
 
     private void configureNextFab(){
@@ -146,17 +169,6 @@ public class LearnActivity extends AppCompatActivity
         Toast.makeText(this, "End of the deck", Toast.LENGTH_LONG).show();
     }
 
-    //-----------------------------------
-    // CALLBACKS
-    //-----------------------------------
-
-    @Override
-    public void onAnswer() {
-        nextFab.setVisibility(View.VISIBLE);
-        cardNumber--;
-        Log.e(TAG, "memorize answered");
-    }
-
     @Override
     public void onClick(View v) {
         Log.e(TAG, "fab clicked");
@@ -168,9 +180,39 @@ public class LearnActivity extends AppCompatActivity
 
         if(cardNumber >= 0){
             configureQuestion();
-            configureAnswer();
+            configureAnswer(currentFragment);
         }else{
             endOfDeck();
         }
     }
+
+    //-----------------------------------
+    // CALLBACKS
+    //-----------------------------------
+
+    @Override
+    public void onMemorizeAnswer() {
+        Log.e(TAG, "memorize answered");
+        currentFragment = 0;
+
+        nextFab.setVisibility(View.VISIBLE);
+        cardNumber--;
+    }
+
+    @Override
+    public void onQuizAnswer(boolean success) {
+        Log.e(TAG, "quiz answered");
+        if(success){
+            deck.getCards().get(cardNumber).setStatus(1);
+        }
+        Log.e(TAG, "card status = " + deck.getCards().get(cardNumber).getStatus());
+        currentFragment = 1;
+
+        nextFab.setVisibility(View.VISIBLE);
+        cardNumber--;
+    }
+
+
+
+
 }

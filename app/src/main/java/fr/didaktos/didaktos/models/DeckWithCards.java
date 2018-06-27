@@ -15,6 +15,7 @@ public class DeckWithCards  implements Parcelable {
     public static final String NEXT_DECK_ID_KEY = "NEXT_ID";
     public static String CARD_NB_KEY = "CARD_NB";
     public static String ANSWER_KEY = "ANSWER";
+    public static String ALTERNATIVES_KEY = "ALTERNATIVES";
     public static String VALUE_KEY = "VALUE";
 
 
