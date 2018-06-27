@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".controllers.activities.learn.TestActivity"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@drawable/card">
 
     <EditText
         android:id="@+id/test_answer"
@@ -13,21 +14,27 @@
         android:layout_height="wrap_content"
         android:hint="@string/test_answer_hint"
         android:inputType="text"
+        android:textSize="@dimen/text_large"
+        android:textColor="@color/colorPrimaryDark"
         android:layout_centerInParent="true"/>
 
-    <Button
-        android:id="@+id/test_check"
+    <TextView
+        android:id="@+id/test_user_wrong_answer_txt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/test_check"
-        android:layout_below="@+id/test_answer"
-        android:layout_marginTop="@dimen/quiz_btn_height"/>
+        android:textSize="@dimen/text_large"
+        android:textStyle="italic"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="@dimen/margin_medium"
+        android:textColor="@android:color/holo_red_light"/>
 
     <TextView
         android:id="@+id/test_answer_txt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/test_answer"
-        android:layout_marginTop="@dimen/quiz_btn_height"/>
+        android:textSize="@dimen/text_xxlarge"
+        android:textColor="@color/colorPrimaryDark"
+        android:layout_centerInParent="true"
+        android:layout_below="@id/test_user_wrong_answer_txt"/>
 
 </RelativeLayout>
