@@ -43,6 +43,8 @@ public class LearnActivity extends AppCompatActivity
     private DeckWithCards deck;
     private int currentCardNb;
     private int nextFragmentNb = 0;
+    private boolean cardLeftToTestInTheDeck;
+    private boolean cardLeftToQuizInTheDeck;
 
     //DESIGN
     @BindView(R.id.activity_learn_toolbar) Toolbar mToolbar;
@@ -119,9 +121,16 @@ public class LearnActivity extends AppCompatActivity
             configureNextQuestion();
             configureNextAnswer();
             configureNextFab();
-
         }else {
-            endOfDeck();
+            for (int i = 0; i < deck.getCards().size(); i++) {
+                cardLeftToTestInTheDeck = (deck.getCards().get(i).getStatus() != 2);
+            }
+
+            if (cardLeftToTestInTheDeck && nextFragmentNb == 2) {
+                currentCardNb = deck.getCards().size() - 1;
+                configureNextCard();} else {
+                endOfDeck();
+            }
         }
     }
 
@@ -168,6 +177,17 @@ public class LearnActivity extends AppCompatActivity
 
     protected void endOfDeck(){
         Toast.makeText(this, "End of the deck", Toast.LENGTH_LONG).show();
+        switch(nextFragmentNb){
+            case 0:
+                Log.e(TAG, "end of memorize");
+                break;
+            case 1:
+                Log.e(TAG, "end of quiz");
+                break;
+            case 2:
+                Log.e(TAG, "end of test");
+                break;
+        }
     }
 
 
