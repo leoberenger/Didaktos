@@ -36,8 +36,8 @@ public class DataGenerator {
         Card card1 = new Card(0, "drink", "boire", 0);
         Card card2 = new Card(0, "sleep", "dormir", 0);
         Card card3 = new Card(0, "play", "jouer", 0);
-        Card card4 = new Card(1, "1", "Hydrogène", 0);
-        Card card5 = new Card(1, "2", "Hélium", 0);
+        Card card4 = new Card(1, "1", "Hydrogene", 0);
+        Card card5 = new Card(1, "2", "Helium", 0);
         Card card6 = new Card(1, "3", "Lithium", 0);
         Card card7 = new Card(1, "4", "Bore", 0);
         Card card8 = new Card(2, "Triangle rectangle", "Pythagore", 0);

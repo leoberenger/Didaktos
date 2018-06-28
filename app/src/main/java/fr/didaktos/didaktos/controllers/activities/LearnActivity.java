@@ -1,19 +1,21 @@
 package fr.didaktos.didaktos.controllers.activities;
 
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.DialogInterface;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -45,7 +47,6 @@ public class LearnActivity extends AppCompatActivity
     private DeckWithCards deck;
     private int currentCardNb;
     private int nextFragmentNb = 0;
-    private int cardLeftInTheDeck = 0;
 
     //DESIGN
     @BindView(R.id.activity_learn_toolbar) Toolbar mToolbar;
@@ -118,23 +119,26 @@ public class LearnActivity extends AppCompatActivity
             currentCardNb--;
         }
 
-        if(currentCardNb >= 0){
+        if (currentCardNb >= 0){
             configureNextQuestion();
             configureNextAnswer();
             configureNextFab();
         }else {
+            boolean cardLeftInTheDeck = false;
             for (int i = 0; i < deck.getCards().size(); i++) {
-                if(deck.getCards().get(i).getStatus() != 2)
-                    cardLeftInTheDeck++;
+                if(deck.getCards().get(i).getStatus() != 2){
+                    cardLeftInTheDeck = true;
+                }
             }
 
-            if (cardLeftInTheDeck > 0 && nextFragmentNb == 2) {
+            if (cardLeftInTheDeck && nextFragmentNb == 2) {
                 currentCardNb = deck.getCards().size() - 1;
                 configureNextCard();
-                cardLeftInTheDeck = 0;
+            }else{
+                endOfDeckAlertDialog();
             }
 
-            endOfDeck();
+
 
         }
     }
@@ -183,23 +187,61 @@ public class LearnActivity extends AppCompatActivity
 
 
 
-
-
     //---------------------------
     //EVENTS
     //--------------------------
 
-    protected void endOfDeck(){
-        Toast.makeText(this, "End of the deck", Toast.LENGTH_LONG).show();
-        switch(nextFragmentNb){
-            case 0:
-                Log.e(TAG, "end of memorize");
+    private void endOfDeckAlertDialog(){
+
+        final AlertDialog.Builder builder = new AlertDialog.Builder(LearnActivity.this);
+        LayoutInflater inflater = (LayoutInflater) getApplicationContext().getSystemService(LAYOUT_INFLATER_SERVICE);
+
+        switch (nextFragmentNb){
+            case 0 :
+                builder .setMessage("Bravo! Vous avez fini la pile! Prêt pour le quiz?")
+                        .setPositiveButton("Non. Recommencer!", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.dismiss();
+                            }
+                        })
+                        .setNegativeButton("Oui!", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                            }
+                        })
+                        .create()
+                        .show();
                 break;
-            case 1:
-                Log.e(TAG, "end of quiz");
+            case 1 :
+                builder .setMessage("Bravo! Vous avez fini la pile! Prêt pour le test?")
+                        .setPositiveButton("Non. Recommencer!", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.dismiss();
+                            }
+                        })
+                        .setNegativeButton("Oui!", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                            }
+                        })
+                        .create()
+                        .show();
                 break;
+
             case 2:
-                Log.e(TAG, "end of test");
+                builder .setMessage("Bravo! Vous avez fini la pile!")
+                        .setPositiveButton("Choisir une nouvelle pile", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.dismiss();
+                            }
+                        })
+                        .setNegativeButton("Voir les résultats", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                            }
+                        })
+                        .create()
+                        .show();
                 break;
         }
     }
