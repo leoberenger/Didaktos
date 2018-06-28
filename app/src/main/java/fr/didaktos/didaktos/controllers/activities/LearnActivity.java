@@ -63,9 +63,7 @@ public class LearnActivity extends AppCompatActivity
 
         this.configureToolbar();
         this.configureBottomNavigation();
-        this.configureNextFab();
-        this.configureNextQuestion();
-        this.configureNextAnswerFragment();
+        this.configureNextCard();
     }
 
     //---------------------------
@@ -87,24 +85,15 @@ public class LearnActivity extends AppCompatActivity
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
-            Fragment fragment = null;
-
             switch (item.getItemId()) {
-                case R.id.navigation_memorize:
-                    fragment = new MemorizeFragment();
-                    nextFragmentNb = 0;
-                    break;
-                case R.id.navigation_quiz:
-                    fragment = new QuizFragment();
-                    nextFragmentNb = 1;
-                    break;
-                case R.id.navigation_test:
-                    fragment = new TestFragment();
-                    nextFragmentNb = 2;
-                    break;
+                case R.id.navigation_memorize: nextFragmentNb = 0; break;
+                case R.id.navigation_quiz: nextFragmentNb = 1; break;
+                case R.id.navigation_test: nextFragmentNb = 2; break;
             }
 
-            replaceCurrentFragment(fragment);
+            currentCardNb = deck.getCards().size()-1;
+
+            configureNextCard();
             return true;
         }
     };
@@ -118,18 +107,47 @@ public class LearnActivity extends AppCompatActivity
     //CONFIGURATION OF FRAGMENTS
     //--------------------------
 
-    private void replaceCurrentFragment(Fragment fragment){
-        Bundle args = new Bundle();
 
+    private void configureNextCard(){
+
+        //Configure next card number
+        while(currentCardNb >= 0 && deck.getCards().get(currentCardNb).getStatus() == 2){
+            currentCardNb--;
+        }
+
+        if(currentCardNb >= 0){
+            configureNextQuestion();
+            configureNextAnswer();
+            configureNextFab();
+
+        }else {
+            endOfDeck();
+        }
+    }
+
+    private void configureNextAnswer(){
+
+        //Configure Args
+        Bundle args = new Bundle();
         args.putString(DeckWithCards.ANSWER_KEY, deck.getCards().get(currentCardNb).getValue());
 
-        //Array of alternative answers For Quiz Fragment
         if(nextFragmentNb == 1){
             String [] alternatives = {deck.getCards().get(0).getValue(), deck.getCards().get(1).getValue(),
                     deck.getCards().get(2).getValue()};
             args.putStringArray(DeckWithCards.ALTERNATIVES_KEY, alternatives);
         }
 
+
+        //Configure Fragment
+        Fragment fragment = null;
+
+        switch (nextFragmentNb){
+            case 0: fragment = new MemorizeFragment(); break;
+            case 1: fragment = new QuizFragment(); break;
+            case 2: fragment = new TestFragment(); break;
+        }
+
+        //Replace current Fragment
         fragment.setArguments(args);
 
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
@@ -137,23 +155,10 @@ public class LearnActivity extends AppCompatActivity
         transaction.commit();
     }
 
+
     private void configureNextQuestion(){
         String question = deck.getCards().get(currentCardNb).getKey();
         questionTextView.setText(question);
-    }
-
-    private void configureNextAnswerFragment(){
-
-        Fragment fragment = null;
-
-        switch (nextFragmentNb){
-            case 0: fragment = new MemorizeFragment(); break;
-            case 1: fragment = new QuizFragment(); break;
-            case 2: fragment = new TestFragment(); break;
-            }
-
-        replaceCurrentFragment(fragment);
-
     }
 
 
@@ -173,16 +178,7 @@ public class LearnActivity extends AppCompatActivity
     @OnClick(R.id.next_fab)
     public void seeNextCard(View v) {
         Log.e(TAG, "fab clicked");
-        while(currentCardNb >= 0 && deck.getCards().get(currentCardNb).getStatus() == 2){
-            currentCardNb--;
-        }
-
-        if(currentCardNb >= 0){
-            configureNextQuestion();
-            configureNextAnswerFragment();
-        }else{
-            endOfDeck();
-        }
+        this.configureNextCard();
     }
 
 
