@@ -1,4 +1,4 @@
-package fr.didaktos.didaktos.controllers.fragments;
+package fr.didaktos.didaktos.controllers.fragments.learn;
 
 
 import android.app.Activity;
@@ -9,15 +9,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.TextView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 import fr.didaktos.didaktos.R;
 import fr.didaktos.didaktos.models.DeckWithCards;
-
-import static fr.didaktos.didaktos.controllers.activities.learn.LearnActivity.shuffleArray;
+import fr.didaktos.didaktos.utils.Utils;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -26,7 +23,9 @@ public class QuizFragment extends Fragment
 implements View.OnClickListener{
 
     private String TAG = "Quiz Fragment";
+
     OnQuizAnswerListener mCallback;
+
     private boolean success = false;
     private String answer;
     private String [] alternatives = new String [3];
@@ -63,7 +62,7 @@ implements View.OnClickListener{
 
     private void configureAnswer(String answer, String [] alternatives) {
         String [] answers = {answer, alternatives[0], alternatives[1], alternatives[2]};
-        shuffleArray(answers);
+        Utils.shuffleArray(answers);
 
         buttons = new Button[]{button0, button1, button2, button3};
         for (int i = 0; i<buttons.length; i++){

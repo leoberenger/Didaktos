@@ -14,7 +14,6 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.didaktos.didaktos.R;
-import fr.didaktos.didaktos.controllers.activities.learn.MemorizeActivity;
 import fr.didaktos.didaktos.controllers.fragments.MainFragment;
 import fr.didaktos.didaktos.controllers.fragments.StatsFragment;
 import fr.didaktos.didaktos.injections.Injection;
@@ -64,7 +63,7 @@ public class StatsActivity extends AppCompatActivity
 
     @Override
     public void onDeckSelected(DeckWithCards deck) {
-        Intent intent = new Intent(this, MemorizeActivity.class);
+        Intent intent = new Intent(this, LearnActivity.class);
         intent.putExtra(DeckWithCards.DECK_KEY, deck);
         startActivity(intent);
     }

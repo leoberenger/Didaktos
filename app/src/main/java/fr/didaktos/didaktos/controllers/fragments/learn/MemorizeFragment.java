@@ -1,4 +1,4 @@
-package fr.didaktos.didaktos.controllers.fragments;
+package fr.didaktos.didaktos.controllers.fragments.learn;
 
 
 import android.app.Activity;

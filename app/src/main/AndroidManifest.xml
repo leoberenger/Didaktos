@@ -24,7 +24,7 @@
         <activity android:name=".controllers.activities.learn.TestActivity" />
         <activity android:name=".controllers.activities.EditionActivity" />
         <activity android:name=".controllers.activities.StatsActivity" />
-        <activity android:name=".controllers.activities.learn.LearnActivity"></activity>
+        <activity android:name=".controllers.activities.LearnActivity"></activity>
     </application>
 
 </manifest>
