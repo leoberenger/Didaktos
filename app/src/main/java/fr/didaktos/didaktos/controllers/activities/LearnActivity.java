@@ -15,6 +15,8 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -137,18 +139,30 @@ public class LearnActivity extends AppCompatActivity
         }
     }
 
+    private void configureNextQuestion(){
+        String question = deck.getCards().get(currentCardNb).getKey();
+        questionTextView.setText(question);
+    }
+
     private void configureNextAnswer(){
 
         //Configure Args
         Bundle args = new Bundle();
         args.putString(DeckWithCards.ANSWER_KEY, deck.getCards().get(currentCardNb).getValue());
 
+        //Alternative answers for Quiz
         if(nextFragmentNb == 1){
-            String [] alternatives = {deck.getCards().get(0).getValue(), deck.getCards().get(1).getValue(),
-                    deck.getCards().get(2).getValue()};
-            args.putStringArray(DeckWithCards.ALTERNATIVES_KEY, alternatives);
-        }
+            ArrayList<String> alternatives = new ArrayList<>();
+            int i = 0;
 
+            while(alternatives.size()<3){
+                if(i != currentCardNb){
+                    alternatives.add(deck.getCards().get(i).getValue());
+                }
+                i++;
+            }
+            args.putStringArrayList(DeckWithCards.ALTERNATIVES_KEY, alternatives);
+        }
 
         //Configure Fragment
         Fragment fragment = null;
@@ -168,10 +182,7 @@ public class LearnActivity extends AppCompatActivity
     }
 
 
-    private void configureNextQuestion(){
-        String question = deck.getCards().get(currentCardNb).getKey();
-        questionTextView.setText(question);
-    }
+
 
 
     //---------------------------

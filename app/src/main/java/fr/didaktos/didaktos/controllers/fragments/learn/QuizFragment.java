@@ -10,6 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import java.util.ArrayList;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.didaktos.didaktos.R;
@@ -28,7 +30,7 @@ implements View.OnClickListener{
 
     private boolean success = false;
     private String answer;
-    private String [] alternatives = new String [3];
+    private ArrayList<String> alternatives;
 
     private Button [] buttons;
     @BindView(R.id.quiz_answer_0_btn) Button button0;
@@ -49,7 +51,7 @@ implements View.OnClickListener{
         ButterKnife.bind(this, view);
 
         answer = getArguments().getString(DeckWithCards.ANSWER_KEY);
-        alternatives = getArguments().getStringArray(DeckWithCards.ALTERNATIVES_KEY);
+        alternatives = getArguments().getStringArrayList(DeckWithCards.ALTERNATIVES_KEY);
 
         this.configureAnswer(answer, alternatives);
 
@@ -60,8 +62,14 @@ implements View.OnClickListener{
     // CONFIGURATION
     //-------------------
 
-    private void configureAnswer(String answer, String [] alternatives) {
-        String [] answers = {answer, alternatives[0], alternatives[1], alternatives[2]};
+    private void configureAnswer(String answer, ArrayList<String> alternatives) {
+        String [] answers = new String[4];
+        answers[0] = answer;
+
+        for(int i = 1; i<answers.length; i++){
+            answers[i] = alternatives.get(i-1);
+        }
+
         Utils.shuffleArray(answers);
 
         buttons = new Button[]{button0, button1, button2, button3};
