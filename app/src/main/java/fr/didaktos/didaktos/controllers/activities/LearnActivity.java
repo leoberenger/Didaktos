@@ -43,8 +43,7 @@ public class LearnActivity extends AppCompatActivity
     private DeckWithCards deck;
     private int currentCardNb;
     private int nextFragmentNb = 0;
-    private boolean cardLeftToTestInTheDeck;
-    private boolean cardLeftToQuizInTheDeck;
+    private int cardLeftInTheDeck = 0;
 
     //DESIGN
     @BindView(R.id.activity_learn_toolbar) Toolbar mToolbar;
@@ -123,14 +122,18 @@ public class LearnActivity extends AppCompatActivity
             configureNextFab();
         }else {
             for (int i = 0; i < deck.getCards().size(); i++) {
-                cardLeftToTestInTheDeck = (deck.getCards().get(i).getStatus() != 2);
+                if(deck.getCards().get(i).getStatus() != 2)
+                    cardLeftInTheDeck++;
             }
 
-            if (cardLeftToTestInTheDeck && nextFragmentNb == 2) {
+            if (cardLeftInTheDeck > 0 && nextFragmentNb == 2) {
                 currentCardNb = deck.getCards().size() - 1;
-                configureNextCard();} else {
-                endOfDeck();
+                configureNextCard();
+                cardLeftInTheDeck = 0;
             }
+
+            endOfDeck();
+
         }
     }
 
