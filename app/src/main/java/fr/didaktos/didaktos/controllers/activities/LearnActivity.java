@@ -2,6 +2,7 @@ package fr.didaktos.didaktos.controllers.activities;
 
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.FloatingActionButton;
@@ -114,32 +115,34 @@ public class LearnActivity extends AppCompatActivity
 
     private void configureNextCard(){
 
-        //Configure next card number
-        while(currentCardNb >= 0 && deck.getCards().get(currentCardNb).getStatus() == 2){
-            currentCardNb--;
+        boolean cardLeftInTheDeck = false;
+        for (int i = 0; i < deck.getCards().size(); i++) {
+            if(deck.getCards().get(i).getStatus() != 2){
+                cardLeftInTheDeck = true;
+            }
         }
 
-        if (currentCardNb >= 0){
-            configureNextQuestion();
-            configureNextAnswer();
-            configureNextFab();
-        }else {
-            boolean cardLeftInTheDeck = false;
-            for (int i = 0; i < deck.getCards().size(); i++) {
-                if(deck.getCards().get(i).getStatus() != 2){
-                    cardLeftInTheDeck = true;
+        if(!cardLeftInTheDeck){
+            deckFinishedAlertDialog();
+        }else{
+
+            //Configure next card number
+            while(currentCardNb >= 0 && deck.getCards().get(currentCardNb).getStatus() == 2){
+                currentCardNb--;
+            }
+
+            if (currentCardNb >= 0){
+                configureNextQuestion();
+                configureNextAnswer();
+                configureNextFab();
+            }else{
+                if(nextFragmentNb != 2){
+                    endOfDeckAlertDialog();
+                }else{
+                    currentCardNb = deck.getCards().size() - 1;
+                    configureNextCard();
                 }
             }
-
-            if (cardLeftInTheDeck && nextFragmentNb == 2) {
-                currentCardNb = deck.getCards().size() - 1;
-                configureNextCard();
-            }else{
-                endOfDeckAlertDialog();
-            }
-
-
-
         }
     }
 
@@ -199,51 +202,58 @@ public class LearnActivity extends AppCompatActivity
         switch (nextFragmentNb){
             case 0 :
                 builder .setMessage("Bravo! Vous avez fini la pile! Prêt pour le quiz?")
-                        .setPositiveButton("Non. Recommencer!", new DialogInterface.OnClickListener() {
+                        .setPositiveButton("Pas encore!", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
-                                dialog.dismiss();
-                            }
+                                currentCardNb = deck.getCards().size()-1;
+                                nextFragmentNb = 0;
+                                configureNextCard();
+                                }
                         })
                         .setNegativeButton("Oui!", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
-                                dialog.cancel();
-                            }
+                                currentCardNb = deck.getCards().size()-1;
+                                nextFragmentNb = 1;
+                                configureNextCard();
+                                }
                         })
                         .create()
                         .show();
                 break;
             case 1 :
                 builder .setMessage("Bravo! Vous avez fini la pile! Prêt pour le test?")
-                        .setPositiveButton("Non. Recommencer!", new DialogInterface.OnClickListener() {
+                        .setPositiveButton("Pas encore", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
-                                dialog.dismiss();
-                            }
+                                currentCardNb = deck.getCards().size()-1;
+                                nextFragmentNb = 1;
+                                configureNextCard();
+                                }
                         })
                         .setNegativeButton("Oui!", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
-                                dialog.cancel();
-                            }
-                        })
-                        .create()
-                        .show();
-                break;
-
-            case 2:
-                builder .setMessage("Bravo! Vous avez fini la pile!")
-                        .setPositiveButton("Choisir une nouvelle pile", new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                dialog.dismiss();
-                            }
-                        })
-                        .setNegativeButton("Voir les résultats", new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                dialog.cancel();
-                            }
+                                currentCardNb = deck.getCards().size()-1;
+                                nextFragmentNb = 2;
+                                configureNextCard();
+                                }
                         })
                         .create()
                         .show();
                 break;
         }
+    }
+
+    private void deckFinishedAlertDialog(){
+        final AlertDialog.Builder builder = new AlertDialog.Builder(LearnActivity.this);
+        LayoutInflater inflater = (LayoutInflater) getApplicationContext().getSystemService(LAYOUT_INFLATER_SERVICE);
+
+        builder .setMessage("Bravo! Vous avez fini la pile!")
+                .setPositiveButton("Retour à l'accueil ", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        Intent intentMain = new Intent(getApplicationContext(), MainActivity.class);
+                        startActivity(intentMain);
+                    }
+                })
+                .create()
+                .show();
     }
 
 
