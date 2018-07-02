@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -52,7 +53,18 @@ public class MainActivity  extends AppCompatActivity
         //this.populateDatabase();
         Stetho.initializeWithDefaults(this);
 
-        this.deckViewModel.getDecksWithCards().observe(this, this::configureAndShowMainFragment);
+
+        Bundle extras = getIntent().getExtras();
+
+        if(extras!=null){
+            //If from Search Activity
+            String topicSelected = extras.getString("topicSelected");
+            this.deckViewModel.getDecksWithCardsWithTopic(topicSelected)
+                    .observe(this, this::configureAndShowMainFragment);
+        }else{
+            this.deckViewModel.getDecksWithCards()
+                    .observe(this, this::configureAndShowMainFragment);
+        }
     }
 
     //-----------------------------------
@@ -70,8 +82,7 @@ public class MainActivity  extends AppCompatActivity
         switch (item.getItemId()){
 
             case R.id.menu_search:
-                Intent intentSearch = new Intent(this, LearnActivity.class);
-                intentSearch.putExtra(DeckWithCards.DECK_KEY, deck);
+                Intent intentSearch = new Intent(this, SearchActivity.class);
                 startActivity(intentSearch);
                 return true;
 

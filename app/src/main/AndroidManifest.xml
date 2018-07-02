@@ -21,15 +21,20 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".controllers.activities.EditionActivity"
-            android:parentActivityName="fr.didaktos.didaktos.controllers.activities.MainActivity" />
+        <activity
+            android:name=".controllers.activities.EditionActivity"
+            android:parentActivityName=".controllers.activities.MainActivity" />
 
-        <activity android:name=".controllers.activities.StatsActivity"
-            android:parentActivityName="fr.didaktos.didaktos.controllers.activities.MainActivity" />
+        <activity
+            android:name=".controllers.activities.StatsActivity"
+            android:parentActivityName=".controllers.activities.MainActivity" />
 
-        <activity android:name=".controllers.activities.LearnActivity"
-            android:parentActivityName="fr.didaktos.didaktos.controllers.activities.MainActivity" />
+        <activity
+            android:name=".controllers.activities.LearnActivity"
+            android:parentActivityName=".controllers.activities.MainActivity" />
 
+        <activity android:name=".controllers.activities.SearchActivity"
+            android:parentActivityName=".controllers.activities.MainActivity" />
     </application>
 
 </manifest>

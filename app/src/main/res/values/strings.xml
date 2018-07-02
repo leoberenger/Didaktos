@@ -33,7 +33,13 @@
     <string name="description">Description (ex: Apprenez les verbes irréguliers)</string>
     <string name="create">CREER</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="title_activity_memorize">MemorizeActivity</string>
+    <!-- SEARCH -->
+    <string name="search_topic_textview">Choisis un sujet : </string>
+    <string-array name="search_topic">
+        <item>English</item>
+        <item>Physique</item>
+        <item>Maths</item>
+    </string-array>
+    <string name="search_btn">Chercher </string>
+
 </resources>

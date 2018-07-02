@@ -11,6 +11,7 @@ import android.widget.Toast;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import fr.didaktos.didaktos.R;
 import fr.didaktos.didaktos.controllers.fragments.EditionFragment;
 import fr.didaktos.didaktos.injections.Injection;
@@ -36,6 +37,7 @@ public class EditionActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edition);
+        ButterKnife.bind(this);
 
         this.configureViewModel();
         this.configureToolbar();
@@ -51,6 +53,8 @@ public class EditionActivity extends AppCompatActivity
 
     private void configureToolbar(){
         setSupportActionBar(mToolbar);
+        ActionBar ab = getSupportActionBar();
+        ab.setDisplayHomeAsUpEnabled(true);
     }
 
     private void  configureAndShowEditionFragment(List<Deck> decks){

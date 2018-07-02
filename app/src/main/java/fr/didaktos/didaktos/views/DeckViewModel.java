@@ -49,16 +49,16 @@ public class DeckViewModel extends ViewModel {
         return deckDataSource.getDeck(deckId);
     }
 
-    public LiveData<Deck> getDeckWithTitle(String title){
-        return deckDataSource.getDeckWithTitle(title);
-    }
-
     public LiveData<DeckWithCards> getDeckWithCards(long deckId){
         return deckDataSource.getDeckWithCards(deckId);
     }
 
     public LiveData<List<DeckWithCards>> getDecksWithCards(){
         return deckDataSource.getDecksWithCards();
+    }
+
+    public LiveData<List<DeckWithCards>> getDecksWithCardsWithTopic(String topicSelected){
+        return deckDataSource.getDecksWithCardsWithTopic(topicSelected);
     }
 
     public void createDeck (Deck d){
