@@ -96,9 +96,9 @@ implements View.OnClickListener{
                         button.setBackgroundColor(Color.WHITE);
                         button.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
                         success = true;
-                    }else {
+                    }else{
                         button.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-                        button.setTextColor(getResources().getColor(R.color.colorPrimary));
+                        button.setTextColor(getResources().getColor(R.color.colorGrey));
                         success = false;
                     }
                 }
