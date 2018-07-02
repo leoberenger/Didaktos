@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".controllers.activities.SearchActivity">
+
+    <!-- Import toolbar -->
+    <include layout="@layout/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/toolbar_height"
+        android:id="@+id/activity_search_toolbar"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/activity_search_toolbar"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+        <TextView
+            android:id="@+id/search_topic_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:textSize="@dimen/text_large"
+            android:text="@string/search_topic_textview"/>
+
+        <Spinner
+            android:id="@+id/search_topic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/search_topic_textview"
+            android:layout_marginTop="@dimen/margin_medium"
+            android:layout_centerHorizontal="true"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <!-- Button Search -->
+            <Button
+                android:id="@+id/search_btn"
+                android:layout_width="@dimen/btn_width_large"
+                android:layout_height="@dimen/btn_height_large"
+                android:text="@string/search_btn"
+                android:textColor="#FFF"
+                android:background="@color/colorPrimary"
+                android:layout_centerInParent="true"
+                android:textStyle="bold"/>
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>
