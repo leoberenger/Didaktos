@@ -53,7 +53,7 @@ public class MainFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.decks_recycler_view, container, false);
+        View view = inflater.inflate(R.layout.recycler_view, container, false);
         ButterKnife.bind(this, view);
 
         this.configureRecyclerView();
@@ -81,7 +81,7 @@ public class MainFragment extends Fragment {
     }
 
     private void configureOnClickRecyclerView(){
-        ItemClickSupport.addTo(recyclerView, R.layout.decks_recycler_view_item)
+        ItemClickSupport.addTo(recyclerView, R.layout.fragment_main_recycler_view_item)
                 .setOnItemClickListener((recyclerView, position, v) -> {
                     deckId = adapter.getResult(position).getId();
                     mCallback.onDeckSelected(deckId);

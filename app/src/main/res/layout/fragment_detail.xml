@@ -39,7 +39,7 @@
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 android:gravity="center_horizontal|bottom"
-                android:textSize="@dimen/text_large"
+                android:textSize="@dimen/text_xlarge"
                 android:textStyle="bold"
                 android:textColor="@color/colorAccent"/>
 
@@ -49,7 +49,7 @@
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 android:gravity="center_horizontal|top"
-                android:textSize="@dimen/text_large"
+                android:textSize="@dimen/text_xlarge"
                 android:textStyle="italic"
                 android:textColor="@color/colorAccent"/>
 
@@ -143,10 +143,11 @@
 
         <Button
             android:id="@+id/detail_btn"
-            android:layout_width="@dimen/btn_width"
-            android:layout_height="@dimen/btn_height"
+            android:layout_width="@dimen/btn_width_large"
+            android:layout_height="@dimen/btn_height_large"
             android:background="@color/colorAccent"
-            android:textSize="@dimen/text_medium"
+            android:textSize="@dimen/text_large"
+            android:textColor="@android:color/white"
             android:text="@string/detail_btn"/>
 
     </LinearLayout>

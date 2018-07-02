@@ -35,7 +35,7 @@ public class DecksStatsRecyclerAdapter extends RecyclerView.Adapter<DecksStatsVi
     public DecksStatsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType){
         Context context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
-        View view = inflater.inflate(R.layout.decks_stats_recycler_view_item, parent, false);
+        View view = inflater.inflate(R.layout.fragment_stats_recycler_view_item, parent, false);
 
         return new DecksStatsViewHolder(view);
     }

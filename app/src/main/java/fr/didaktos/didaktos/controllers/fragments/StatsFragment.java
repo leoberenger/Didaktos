@@ -9,7 +9,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
@@ -21,7 +20,6 @@ import butterknife.ButterKnife;
 import fr.didaktos.didaktos.R;
 import fr.didaktos.didaktos.models.DeckWithCards;
 import fr.didaktos.didaktos.utils.ItemClickSupport;
-import fr.didaktos.didaktos.views.DecksRecyclerAdapter;
 import fr.didaktos.didaktos.views.DecksStatsRecyclerAdapter;
 
 /**
@@ -56,7 +54,7 @@ public class StatsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.decks_recycler_view, container, false);
+        View view = inflater.inflate(R.layout.recycler_view, container, false);
         ButterKnife.bind(this, view);
 
         this.configureRecyclerView();
@@ -84,7 +82,7 @@ public class StatsFragment extends Fragment {
     }
 
     private void configureOnClickRecyclerView(){
-        ItemClickSupport.addTo(recyclerView, R.layout.decks_stats_recycler_view_item)
+        ItemClickSupport.addTo(recyclerView, R.layout.fragment_stats_recycler_view_item)
                 .setOnItemClickListener((recyclerView, position, v) -> {
                     deckId = adapter.getResult(position).getId();
 
