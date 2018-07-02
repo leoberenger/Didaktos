@@ -6,7 +6,7 @@
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".controllers.activities.learn.BaseLearnActivity">
+    tools:context=".controllers.activities.LearnActivity">
 
     <!-- Import toolbar -->
     <include layout="@layout/toolbar"
@@ -67,16 +67,12 @@
 
     </LinearLayout>
 
-
-
-
-
     <!-- Bottom Navigation -->
 
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/navigation"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/btn_height_large"
         android:layout_marginEnd="0dp"
         android:layout_marginStart="0dp"
         android:background="?android:attr/windowBackground"

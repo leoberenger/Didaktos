@@ -58,7 +58,7 @@ public class LearnActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_base_learn);
+        setContentView(R.layout.activity_learn);
         ButterKnife.bind(this);
 
         deck = getIntent().getParcelableExtra(DeckWithCards.DECK_KEY);
