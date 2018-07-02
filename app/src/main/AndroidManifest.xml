@@ -12,6 +12,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
         <activity android:name=".controllers.activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -19,12 +20,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".controllers.activities.learn.MemorizeActivity" />
-        <activity android:name=".controllers.activities.learn.QuizActivity" />
-        <activity android:name=".controllers.activities.learn.TestActivity" />
-        <activity android:name=".controllers.activities.EditionActivity" />
-        <activity android:name=".controllers.activities.StatsActivity" />
-        <activity android:name=".controllers.activities.LearnActivity"></activity>
+
+        <activity android:name=".controllers.activities.EditionActivity"
+            android:parentActivityName="fr.didaktos.didaktos.controllers.activities.MainActivity" />
+
+        <activity android:name=".controllers.activities.StatsActivity"
+            android:parentActivityName="fr.didaktos.didaktos.controllers.activities.MainActivity" />
+
+        <activity android:name=".controllers.activities.LearnActivity"
+            android:parentActivityName="fr.didaktos.didaktos.controllers.activities.MainActivity" />
+
     </application>
 
 </manifest>

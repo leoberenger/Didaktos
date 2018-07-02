@@ -10,7 +10,8 @@
     <!-- Import toolbar -->
     <include layout="@layout/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/toolbar_height"/>
+        android:layout_height="@dimen/toolbar_height"
+        android:id="@+id/activity_edition_toolbar"/>
 
     <RelativeLayout
         android:id="@+id/activity_edition_fragment"
