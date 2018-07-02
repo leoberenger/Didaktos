@@ -69,15 +69,14 @@ public class TestFragment extends Fragment implements TextView.OnEditorActionLis
         answerEditText.setVisibility(GONE);
 
         answerTextView.setVisibility(View.VISIBLE);
-        String goodAnswer = answer + " V";
-        answerTextView.setText(goodAnswer);
+        answerTextView.setText(answer);
     }
 
     private void showWrongAnswer(){
         answerEditText.setVisibility(GONE);
 
         wrongAnswerTextView.setVisibility(View.VISIBLE);
-        String wrongAnswer = answerEditText.getText().toString() + " X";
+        String wrongAnswer = answerEditText.getText().toString();
         wrongAnswerTextView.setText(wrongAnswer);
 
         answerTextView.setVisibility(View.VISIBLE);
