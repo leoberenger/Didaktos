@@ -14,7 +14,7 @@ public class DataGenerator {
 
         Deck deck0 = new Deck(0, "English", "Basic Verbs",
                 "Apprends les verbes les plus importants en anglais",
-                "https://picsum.photos/200/200/?image=820");
+                "https://picsum.photos/200/200/?image=152");
         Deck deck1 = new Deck(1, "Physique", "Atomes",
                 "Apprends les atomes et leurs numéros atomiques du tableau périodique",
                 "https://picsum.photos/200/200/?image=115");

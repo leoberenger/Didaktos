@@ -2,10 +2,8 @@ package fr.didaktos.didaktos.controllers.fragments;
 
 
 import android.app.Activity;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,12 +13,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
-
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -115,7 +108,7 @@ public class EditionFragment extends Fragment {
                             cardsEdited.get(i).setDeckId(deck.getId());
                             cardsEdited.get(i).setKey(keys[i]);
                             cardsEdited.get(i).setValue(values[i]);
-                            cardsEdited.get(i).setStatus(0);
+                            cardsEdited.get(i).setNextWorkDate(0);
                         }
                         deckEdited.setCards(cardsEdited);
 

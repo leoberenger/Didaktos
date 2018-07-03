@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
@@ -31,6 +32,7 @@ public class DetailFragment extends Fragment {
 
     //FOR DATA
     private DeckWithCards deck;
+    private boolean hasCardToWork;
 
     //FOR DESIGN
     @BindView(R.id.detail_description) TextView textViewDescription;
@@ -58,6 +60,7 @@ public class DetailFragment extends Fragment {
 
         if(getArguments()!=null){
             deck = getArguments().getParcelable(DeckWithCards.DECK_KEY);
+            hasCardToWork = getArguments().getBoolean(DeckWithCards.CARDTOWORK_KEY);
             updateShownDeck(deck);
         }
 
@@ -88,10 +91,13 @@ public class DetailFragment extends Fragment {
 
     @OnClick(R.id.detail_btn)
     public void onClickLearnButton(){
-        Log.e(TAG, "deck cards size = " + deck.getCards().size());
-        Intent intent = new Intent(getContext(), LearnActivity.class);
-        intent.putExtra(DeckWithCards.DECK_KEY, deck);
-        startActivity(intent);
+        if(hasCardToWork){
+            Intent intent = new Intent(getContext(), LearnActivity.class);
+            intent.putExtra(DeckWithCards.DECK_KEY, deck);
+            startActivity(intent);
+        }else {
+            Toast.makeText(getContext(), "Aucune carte à apprendre aujourd'hui!", Toast.LENGTH_LONG).show();
+        }
     }
 
 }

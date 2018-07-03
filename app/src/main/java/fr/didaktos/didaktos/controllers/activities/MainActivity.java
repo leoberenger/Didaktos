@@ -5,15 +5,17 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.facebook.stetho.Stetho;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -26,6 +28,7 @@ import fr.didaktos.didaktos.injections.ViewModelFactory;
 import fr.didaktos.didaktos.models.Card;
 import fr.didaktos.didaktos.models.Deck;
 import fr.didaktos.didaktos.models.DeckWithCards;
+import fr.didaktos.didaktos.utils.Utils;
 import fr.didaktos.didaktos.views.DeckViewModel;
 
 public class MainActivity  extends AppCompatActivity
@@ -38,6 +41,7 @@ public class MainActivity  extends AppCompatActivity
     private DeckViewModel deckViewModel;
     private ArrayList<DeckWithCards> deckArrayList;
     private DeckWithCards deck;
+    private int currentDate;
 
     @BindView(R.id.toolbar) Toolbar mToolbar;
 
@@ -53,6 +57,7 @@ public class MainActivity  extends AppCompatActivity
         //this.populateDatabase();
         Stetho.initializeWithDefaults(this);
 
+        currentDate = Utils.getCurrentDate();
 
         Bundle extras = getIntent().getExtras();
 
@@ -149,6 +154,20 @@ public class MainActivity  extends AppCompatActivity
                 .findFragmentById(R.id.fragment_detail_layout);
 
         Bundle bundle = new Bundle();
+
+        boolean cardToWork = false;
+
+        //Check in the deck if card to work
+        for(int i = 0; i<deck.getCards().size(); i++){
+            if(deck.getCards().get(i).getNextWorkDate() <= currentDate){
+                cardToWork = true;
+            }
+        }
+        //If yes, add deck to list
+        if(cardToWork){
+            bundle.putBoolean(DeckWithCards.CARDTOWORK_KEY, cardToWork);
+        }
+
         bundle.putParcelable(DeckWithCards.DECK_KEY, deck);
 
         if (fragment == null) {

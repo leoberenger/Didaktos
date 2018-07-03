@@ -2,9 +2,7 @@ package fr.didaktos.didaktos.views;
 
 import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -39,7 +37,7 @@ public class DecksStatsViewHolder extends RecyclerView.ViewHolder {
         //Progress bar
         float doneCards = 0;
         for (int i = 0; i < d.getCards().size(); i++) {
-            if (d.getCards().get(i).getStatus() == 2) {
+            if (d.getCards().get(i).getNextWorkDate() == 2) {
                 doneCards++;
             }
         }

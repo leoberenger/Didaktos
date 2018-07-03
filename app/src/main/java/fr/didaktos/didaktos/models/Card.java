@@ -11,17 +11,17 @@ public class Card implements Parcelable {
     private long deckId;
     private String key;
     private String value;
-    private int status;
+    private int nextWorkDate;
 
     //---------------------------
     //CONSTRUCTORS
     //--------------------------
 
-    public Card(long deckId, String key, String value, int status) {
+    public Card(long deckId, String key, String value, int nextWorkDate) {
         this.deckId = deckId;
         this.key = key;
         this.value = value;
-        this.status = status;
+        this.nextWorkDate = nextWorkDate;
     }
 
     //---------------------------
@@ -40,8 +40,8 @@ public class Card implements Parcelable {
     public String getValue() {
         return value;
     }
-    public int getStatus() {
-        return status;
+    public int getNextWorkDate() {
+        return nextWorkDate;
     }
 
     //---------------------------
@@ -60,8 +60,8 @@ public class Card implements Parcelable {
     public void setValue(String value) {
         this.value = value;
     }
-    public void setStatus(int status) {
-        this.status = status;
+    public void setNextWorkDate(int nextWorkDate) {
+        this.nextWorkDate = nextWorkDate;
     }
 
 
@@ -79,7 +79,7 @@ public class Card implements Parcelable {
         out.writeLong(id);
         out.writeString(key);
         out.writeString(value);
-        out.writeInt(status);
+        out.writeInt(nextWorkDate);
     }
 
     public static final Creator<Card> CREATOR
@@ -98,6 +98,6 @@ public class Card implements Parcelable {
         id = in.readLong();
         key = in.readString();
         value = in.readString();
-        status = in.readInt();
+        nextWorkDate = in.readInt();
     }
 }

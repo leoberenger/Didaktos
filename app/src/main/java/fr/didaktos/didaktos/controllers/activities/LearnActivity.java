@@ -19,7 +19,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -32,6 +35,7 @@ import fr.didaktos.didaktos.injections.Injection;
 import fr.didaktos.didaktos.injections.ViewModelFactory;
 import fr.didaktos.didaktos.models.Card;
 import fr.didaktos.didaktos.models.DeckWithCards;
+import fr.didaktos.didaktos.utils.Utils;
 import fr.didaktos.didaktos.views.DeckViewModel;
 
 public class LearnActivity extends AppCompatActivity
@@ -49,6 +53,7 @@ public class LearnActivity extends AppCompatActivity
     private DeckWithCards deck;
     private int currentCardNb;
     private int nextFragmentNb = 0;
+    private int currentDate;
 
     //DESIGN
     @BindView(R.id.activity_learn_toolbar) Toolbar mToolbar;
@@ -61,6 +66,8 @@ public class LearnActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_learn);
         ButterKnife.bind(this);
+
+        currentDate = Utils.getCurrentDate();
 
         deck = getIntent().getParcelableExtra(DeckWithCards.DECK_KEY);
         currentCardNb = deck.getCards().size()-1;
@@ -118,19 +125,20 @@ public class LearnActivity extends AppCompatActivity
 
     private void configureNextCard(){
 
-        boolean cardLeftInTheDeck = false;
+        boolean cardToWork = false;
+
         for (int i = 0; i < deck.getCards().size(); i++) {
-            if(deck.getCards().get(i).getStatus() != 2){
-                cardLeftInTheDeck = true;
+            if(deck.getCards().get(i).getNextWorkDate() <= currentDate){
+                cardToWork = true;
             }
         }
 
-        if(!cardLeftInTheDeck){
+        if(!cardToWork){
             deckFinishedAlertDialog();
         }else{
 
             //Configure next card number
-            while(currentCardNb >= 0 && deck.getCards().get(currentCardNb).getStatus() == 2){
+            while(currentCardNb >= 0 && deck.getCards().get(currentCardNb).getNextWorkDate() == 2){
                 currentCardNb--;
             }
 
@@ -288,9 +296,9 @@ public class LearnActivity extends AppCompatActivity
     public void onQuizAnswer(boolean success) {
         Log.e(TAG, "quiz answered");
         if(success){
-            deck.getCards().get(currentCardNb).setStatus(1);
+            deck.getCards().get(currentCardNb).setNextWorkDate(1);
         }
-        Log.e(TAG, "card status = " + deck.getCards().get(currentCardNb).getStatus());
+        Log.e(TAG, "card status = " + deck.getCards().get(currentCardNb).getNextWorkDate());
 
         nextFragmentNb = 1;
         currentCardNb--;
@@ -303,11 +311,11 @@ public class LearnActivity extends AppCompatActivity
         Card currentCard = deck.getCards().get(currentCardNb);
 
         if(success){
-            currentCard.setStatus(2);
+            currentCard.setNextWorkDate((currentDate+1));
             currentCard.setDeckId(deck.getId());
             this.deckViewModel.updateCard(currentCard);
         }else{
-            currentCard.setStatus(0);
+            currentCard.setNextWorkDate(0);
         }
 
         nextFragmentNb = 2;

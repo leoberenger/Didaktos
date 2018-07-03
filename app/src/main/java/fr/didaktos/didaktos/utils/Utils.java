@@ -1,5 +1,8 @@
 package fr.didaktos.didaktos.utils;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 import java.util.Random;
 
 public class Utils {
@@ -15,5 +18,10 @@ public class Utils {
             ar[index] = ar[i];
             ar[i] = a;
         }
+    }
+
+    public static int getCurrentDate(){
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd", Locale.FRANCE);
+        return Integer.valueOf(sdf.format(new Date()));
     }
 }
