@@ -16,7 +16,7 @@
         android:layout_weight="1"
         android:textSize="@dimen/text_xxlarge"
         android:textColor="@color/colorPrimaryDark"
-        android:text="NEW DECK"/>
+        android:text="@string/edition_header"/>
 
 
     <EditText
@@ -24,7 +24,7 @@
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_weight="0.5"
-        android:hint="@string/title"
+        android:hint="@string/edition_title"
         android:inputType="text"
         android:layout_marginBottom="@dimen/margin_medium"/>
 
@@ -33,7 +33,7 @@
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_weight="0.5"
-        android:hint="@string/topic"
+        android:hint="@string/edition_topic"
         android:inputType="text"
         android:layout_marginBottom="@dimen/margin_medium"/>
 
@@ -43,7 +43,7 @@
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_weight="0.5"
-        android:hint="@string/description"
+        android:hint="@string/edition_description"
         android:inputType="text"
         android:layout_marginBottom="@dimen/margin_large"/>
 
@@ -57,15 +57,26 @@
         android:orientation="vertical"/>
 
     <!-- Button Update/Create -->
-    <Button
-        android:id="@+id/edition_button"
-        android:layout_width="@dimen/btn_width"
-        android:layout_height="@dimen/btn_height"
-        android:layout_weight="0.5"
-        android:textColor="#FFF"
-        android:textStyle="bold"
-        android:text="@string/create"
-        android:background="@color/colorPrimary"
-        android:layout_gravity="center"/>
+    
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:layout_marginBottom="@dimen/margin_medium">
+
+        <Button
+            android:id="@+id/edition_button"
+            android:layout_width="@dimen/btn_width_large"
+            android:layout_height="@dimen/btn_height_large"
+            android:textColor="#FFF"
+            android:textStyle="bold"
+            android:text="@string/edition_create"
+            android:background="@color/colorPrimary"/>
+
+    </LinearLayout>
+
+
+
 
 </LinearLayout>

@@ -50,8 +50,7 @@ public class EditionFragment extends Fragment {
     private String title;
     private String topic;
     private String description;
-    private int totalRows;
-    private int currentRowsNb;
+    private int currentRowsNb = 0;
     private String [] keys;
     private String [] values;
     private long nextDeckId;
@@ -74,12 +73,7 @@ public class EditionFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_edition, container, false);
         ButterKnife.bind(this, view);
 
-        //Create Rows
-        totalRows = 4;
-        currentRowsNb = 0;
-        for(int i = 0; i< totalRows; i++){
-            this.createNewRow();
-        }
+        this.createRows(10);
 
         //Retrieve data
         isEditionMode = getArguments().getBoolean(EditionActivity.EDITION_KEY);
@@ -186,6 +180,13 @@ public class EditionFragment extends Fragment {
             values[i] = value.getText().toString();
         }
 
+    }
+
+    private void createRows(int totalRows){
+
+        for(int i = 0; i< totalRows; i++){
+            this.createNewRow();
+        }
     }
 
     private void createNewRow(){

@@ -26,12 +26,13 @@
     <string name="memorize_answer_btn">"?"</string>
 
     <!-- EDITION -->
-    <string name="key">Question</string>
-    <string name="value">Réponse</string>
-    <string name="title">Titre (ex : Verbes irréguliers)</string>
-    <string name="topic">Matière (ex: Maths)</string>
-    <string name="description">Description (ex: Apprenez les verbes irréguliers)</string>
-    <string name="create">CREER</string>
+    <string name="edition_header">Edition</string>
+    <string name="edition_key">Question</string>
+    <string name="edition_value">Réponse</string>
+    <string name="edition_title">Titre (ex : Verbes irréguliers)</string>
+    <string name="edition_topic">Matière (ex: Maths)</string>
+    <string name="edition_description">Description (ex: Apprenez les verbes irréguliers)</string>
+    <string name="edition_create">EDITER</string>
 
     <!-- SEARCH -->
     <string name="search_topic_textview">Choisis un sujet : </string>
