@@ -5,7 +5,7 @@
     android:layout_height="wrap_content"
     android:padding="20dip"
     android:orientation="horizontal"
-    android:background="@drawable/border">
+    android:id="@+id/decks_recycler_view_item_layout">
 
     <ImageView
         android:id="@+id/decks_recycler_view_item_img"

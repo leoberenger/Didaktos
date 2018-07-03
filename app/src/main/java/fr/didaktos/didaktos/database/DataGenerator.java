@@ -17,10 +17,10 @@ public class DataGenerator {
                 "https://picsum.photos/200/200/?image=820");
         Deck deck1 = new Deck(1, "Physique", "Atomes",
                 "Apprends les atomes et leurs numéros atomiques du tableau périodique",
-                "https://picsum.photos/200/200/?image=20");
+                "https://picsum.photos/200/200/?image=115");
         Deck deck2 = new Deck(2, "Maths", "Théorèmes",
                 "Révise les théorèmes de mathématiques!",
-                "https://picsum.photos/200/200/?image=28");
+                "https://picsum.photos/200/200/?image=20");
 
         decks.add(deck0);
         decks.add(deck1);

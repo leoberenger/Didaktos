@@ -1,6 +1,7 @@
 package fr.didaktos.didaktos.views;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -14,11 +15,14 @@ import java.util.List;
 import fr.didaktos.didaktos.R;
 import fr.didaktos.didaktos.models.DeckWithCards;
 
+import static android.content.Context.MODE_PRIVATE;
+
 public class DecksRecyclerAdapter  extends RecyclerView.Adapter<DecksViewHolder>{
     private final RequestManager glide;
 
     //FOR DATA
     private final List<DeckWithCards> decks;
+    private SharedPreferences mPreferences;
 
     //CONSTRUCTOR
     public DecksRecyclerAdapter(List<DeckWithCards> d, RequestManager glide){
@@ -37,12 +41,15 @@ public class DecksRecyclerAdapter  extends RecyclerView.Adapter<DecksViewHolder>
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.fragment_main_recycler_view_item, parent, false);
 
+        this.mPreferences = context.getSharedPreferences(DeckWithCards.DECKS_KEY, MODE_PRIVATE);
+
         return new DecksViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull DecksViewHolder viewHolder, int position){
-        viewHolder.updateWithDeck(this.decks.get(position), this.glide);
+        int selectedPosition = mPreferences.getInt("selectedPosition", 0);
+        viewHolder.updateWithDeck(this.decks.get(position), this.glide, position, selectedPosition);
     }
 
     @Override
