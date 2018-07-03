@@ -1,22 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="fr.didaktos.didaktos.controllers.activities.MainActivity"
-    android:orientation="vertical">
+    tools:context=".controllers.activities.StatsActivity">
 
     <!-- Import toolbar -->
     <include layout="@layout/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/toolbar_height"/>
+        android:layout_height="@dimen/toolbar_height"
+        android:id="@+id/activity_stats_toolbar"/>
 
-    <RelativeLayout
+    <LinearLayout
         android:id="@+id/activity_stats_fragment"
-        android:name="com.openclassrooms.realestatemanager.controllers.fragments.StatsFragment"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="match_parent"
+        android:layout_below="@id/activity_stats_toolbar"
+        android:orientation="vertical"/>
 
 
-</LinearLayout>
+</RelativeLayout>

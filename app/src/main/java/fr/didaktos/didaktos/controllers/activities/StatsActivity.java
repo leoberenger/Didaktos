@@ -27,7 +27,7 @@ public class StatsActivity extends AppCompatActivity
 
     private String TAG = "Stats Activity";
 
-    @BindView(R.id.toolbar) Toolbar mToolbar;
+    @BindView(R.id.activity_stats_toolbar) Toolbar mToolbar;
     private ArrayList<DeckWithCards> deckArrayList;
 
     @Override

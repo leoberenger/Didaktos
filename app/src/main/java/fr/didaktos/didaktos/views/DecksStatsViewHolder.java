@@ -48,13 +48,17 @@ public class DecksStatsViewHolder extends RecyclerView.ViewHolder {
         statsProgressBar.setProgress(progress);
 
         if (progress < 33) {
-            statsProgressBar.setBackgroundColor(Color.RED);
+            statsProgressBar.getProgressDrawable().setColorFilter(
+                    Color.RED, android.graphics.PorterDuff.Mode.SRC_IN);
         } else if (progress < 66) {
-            statsProgressBar.setBackgroundColor(Color.YELLOW);
+            statsProgressBar.getProgressDrawable().setColorFilter(
+                    Color.YELLOW, android.graphics.PorterDuff.Mode.SRC_IN);
         } else if (progress < 100) {
-            statsProgressBar.setBackgroundColor(Color.BLUE);
+            statsProgressBar.getProgressDrawable().setColorFilter(
+                    Color.BLUE, android.graphics.PorterDuff.Mode.SRC_IN);
         } else {
-            statsProgressBar.setBackgroundColor(Color.GREEN);
+            statsProgressBar.getProgressDrawable().setColorFilter(
+                    Color.GREEN, android.graphics.PorterDuff.Mode.SRC_IN);
         }
 
     }
