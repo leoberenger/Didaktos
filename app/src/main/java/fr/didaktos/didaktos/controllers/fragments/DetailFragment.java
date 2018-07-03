@@ -83,7 +83,7 @@ public class DetailFragment extends Fragment {
 
         //Examples
         TextView [] examples = new TextView[]{textViewExamples0, textViewExamples1, textViewExamples2, textViewExamples3};
-        for (int i = 0; i<examples.length; i++){
+        for (int i = 0; i<examples.length && i<d.getCards().size() ; i++){
             String str = "- " + d.getCards().get(i).getKey() + " (" + d.getCards().get(i).getValue() + ")";
             examples[i].setText(str);
         }

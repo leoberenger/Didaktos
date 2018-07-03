@@ -6,6 +6,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Toast;
 
 import java.util.List;
@@ -16,6 +17,7 @@ import fr.didaktos.didaktos.R;
 import fr.didaktos.didaktos.controllers.fragments.EditionFragment;
 import fr.didaktos.didaktos.injections.Injection;
 import fr.didaktos.didaktos.injections.ViewModelFactory;
+import fr.didaktos.didaktos.models.Card;
 import fr.didaktos.didaktos.models.Deck;
 import fr.didaktos.didaktos.models.DeckWithCards;
 import fr.didaktos.didaktos.views.DeckViewModel;
@@ -30,6 +32,8 @@ public class EditionActivity extends AppCompatActivity
     //FOR DATA
     private DeckViewModel viewModel;
     private DeckWithCards deck;
+    private long nextDeckId;
+    private long nextCardId;
 
     @BindView(R.id.activity_edition_toolbar) Toolbar mToolbar;
 
@@ -48,7 +52,7 @@ public class EditionActivity extends AppCompatActivity
             isEditionMode = true;
         }
 
-        this.viewModel.getAllDecks().observe(this,this::configureAndShowEditionFragment);
+        this.viewModel.getAllCards().observe(this,this::configureAndShowEditionFragment);
     }
 
     private void configureToolbar(){
@@ -57,7 +61,7 @@ public class EditionActivity extends AppCompatActivity
         ab.setDisplayHomeAsUpEnabled(true);
     }
 
-    private void  configureAndShowEditionFragment(List<Deck> decks){
+    private void  configureAndShowEditionFragment(List<Card> cards){
 
         EditionFragment fragment = (EditionFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_edition_layout);
 
@@ -69,7 +73,11 @@ public class EditionActivity extends AppCompatActivity
             if(isEditionMode) {
                 bundle.putParcelable(DeckWithCards.DECK_KEY, deck);
             }else {
-                bundle.putLong(DeckWithCards.NEXT_DECK_ID_KEY, decks.size());
+                nextDeckId = (cards.get((cards.size())-1).getDeckId())+1;
+                nextCardId = cards.size();
+
+                bundle.putLong(DeckWithCards.NEXT_DECK_ID_KEY, nextDeckId );
+                bundle.putLong(DeckWithCards.NEXT_CARD_ID_KEY, nextCardId);
             }
 
             fragment = new EditionFragment();

@@ -7,7 +7,7 @@ import android.os.Parcelable;
 
 @Entity
 public class Card implements Parcelable {
-    @PrimaryKey(autoGenerate = true) private long id;
+    @PrimaryKey private long id;
     private long deckId;
     private String key;
     private String value;
@@ -17,7 +17,8 @@ public class Card implements Parcelable {
     //CONSTRUCTORS
     //--------------------------
 
-    public Card(long deckId, String key, String value, int nextWorkDate) {
+    public Card(long id, long deckId, String key, String value, int nextWorkDate) {
+        this.id = id;
         this.deckId = deckId;
         this.key = key;
         this.value = value;
@@ -77,6 +78,7 @@ public class Card implements Parcelable {
     @Override
     public void writeToParcel(Parcel out, int flags) {
         out.writeLong(id);
+        out.writeLong(deckId);
         out.writeString(key);
         out.writeString(value);
         out.writeInt(nextWorkDate);
@@ -96,6 +98,7 @@ public class Card implements Parcelable {
 
     private Card(Parcel in) {
         id = in.readLong();
+        deckId = in.readLong();
         key = in.readString();
         value = in.readString();
         nextWorkDate = in.readInt();

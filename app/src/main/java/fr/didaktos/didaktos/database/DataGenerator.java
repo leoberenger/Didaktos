@@ -32,18 +32,18 @@ public class DataGenerator {
     public static List<Card> generateCards(){
         List<Card> cards = new ArrayList<>();
 
-        Card card0 = new Card(0, "eat", "manger", 0);
-        Card card1 = new Card(0, "drink", "boire", 0);
-        Card card2 = new Card(0, "sleep", "dormir", 0);
-        Card card3 = new Card(0, "play", "jouer", 0);
-        Card card4 = new Card(1, "1", "Hydrogene", 0);
-        Card card5 = new Card(1, "2", "Helium", 0);
-        Card card6 = new Card(1, "3", "Lithium", 0);
-        Card card7 = new Card(1, "4", "Bore", 0);
-        Card card8 = new Card(2, "Triangle rectangle", "Pythagore", 0);
-        Card card9 = new Card(2, "Triangles imbriqués", "Thalès", 0);
-        Card card10 = new Card(2, "Droites parallèles", "Réciproque Thalès", 0);
-        Card card11 = new Card(2, "Angle droit", "Réciproque Pythagore", 0);
+        Card card0 = new Card(0, 0, "eat", "manger", 0);
+        Card card1 = new Card(1, 0, "drink", "boire", 0);
+        Card card2 = new Card(2, 0, "sleep", "dormir", 0);
+        Card card3 = new Card(3, 0, "play", "jouer", 0);
+        Card card4 = new Card(4, 1, "1", "Hydrogene", 0);
+        Card card5 = new Card(5, 1, "2", "Helium", 0);
+        Card card6 = new Card(6, 1, "3", "Lithium", 0);
+        Card card7 = new Card(7, 1, "4", "Bore", 0);
+        Card card8 = new Card(8, 2, "Triangle rectangle", "Pythagore", 0);
+        Card card9 = new Card(9, 2, "Triangles imbriqués", "Thalès", 0);
+        Card card10 = new Card(10, 2, "Droites parallèles", "Réciproque Thalès", 0);
+        Card card11 = new Card(11, 2, "Angle droit", "Réciproque Pythagore", 0);
 
         cards.add(card0);
         cards.add(card1);

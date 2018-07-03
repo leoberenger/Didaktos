@@ -54,7 +54,7 @@ public class MainActivity  extends AppCompatActivity
         this.configureToolbar();
 
         this.configureViewModel();
-        //this.populateDatabase();
+        this.populateDatabase();
         Stetho.initializeWithDefaults(this);
 
         currentDate = Utils.getCurrentDate();
@@ -142,7 +142,7 @@ public class MainActivity  extends AppCompatActivity
             deckId = decks.get(0).getId();
             getDeckToShow(deckId);
         }else{
-            Toast.makeText(this, "No property corresponding", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Aucune pile ne correspond à votre recherche", Toast.LENGTH_LONG).show();
         }
     }
 

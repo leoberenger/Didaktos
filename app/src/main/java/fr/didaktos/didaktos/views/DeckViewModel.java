@@ -85,7 +85,7 @@ public class DeckViewModel extends ViewModel {
         executor.execute(()-> cardDataSource.createCard(c));
     }
 
-    public void updateCard (final Card c){
+    public void updateCard (Card c){
         executor.execute(() -> cardDataSource.updateCard(c));
     }
 }

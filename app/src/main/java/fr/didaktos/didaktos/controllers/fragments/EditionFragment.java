@@ -4,6 +4,7 @@ package fr.didaktos.didaktos.controllers.fragments;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,6 +48,7 @@ public class EditionFragment extends Fragment {
     private String [] keys;
     private String [] values;
     private long nextDeckId;
+    private long nextCardId;
 
     @BindView(R.id.edition_table) LinearLayout tableLayout;
     @BindView(R.id.edition_button) Button editionButton;
@@ -66,21 +68,27 @@ public class EditionFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_edition, container, false);
         ButterKnife.bind(this, view);
 
-        this.createRows(10);
-
         //Retrieve data
         isEditionMode = getArguments().getBoolean(EditionActivity.EDITION_KEY);
 
         if(isEditionMode) {
             deck = getArguments().getParcelable(DeckWithCards.DECK_KEY);
+            this.createRows(deck.getCards().size());
             this.showDeckCurrentValues(deck);
         }else {
             nextDeckId = getArguments().getLong(DeckWithCards.NEXT_DECK_ID_KEY);
+            nextCardId = getArguments().getLong(DeckWithCards.NEXT_CARD_ID_KEY);
+            this.createRows(10);
         }
 
         this.configureEditionButton();
         return view;
     }
+
+
+    // -------------------------
+    // CONFIGURE VIEW
+    // -------------------------
 
     private void configureEditionButton(){
         editionButton.setOnClickListener(new View.OnClickListener() {
@@ -89,90 +97,27 @@ public class EditionFragment extends Fragment {
 
                 getDataFromUserInput();
 
-                if(topic.equals("")){
-                    Toast.makeText(getContext(), "No Topic entered", Toast.LENGTH_LONG).show();
-                }else if(title.equals("")){
-                    Toast.makeText(getContext(), "No Title entered", Toast.LENGTH_LONG).show();
-                }else{
-                    //FOR EDITION
-                    if(isEditionMode){
-                        deckEdited = new DeckWithCards();
-                        deckEdited.setId(deck.getId());
-                        deckEdited.setTopic(topic);
-                        deckEdited.setTitle(title);
-                        deckEdited.setDescription(description);
-                        deckEdited.setImgUrl(deck.getImgUrl());
-
-                        ArrayList<Card> cardsEdited = new ArrayList<>(deck.getCards());
-                        for(int i = 0; i<4; i++) {
-                            cardsEdited.get(i).setDeckId(deck.getId());
-                            cardsEdited.get(i).setKey(keys[i]);
-                            cardsEdited.get(i).setValue(values[i]);
-                            cardsEdited.get(i).setNextWorkDate(0);
-                        }
-                        deckEdited.setCards(cardsEdited);
-
-                    }else{
-                    //FOR CREATION
-                        Deck newDeck = new Deck(nextDeckId, topic, title, description, "");
-
-                        ArrayList<Card> newCards = new ArrayList<>();
-                        int i = 0;
-                        while((i<keys.length) && (!keys[i].equals(""))){
-                            Card newCard = new Card(nextDeckId, keys[i], values[i], 0);
-                            newCards.add(newCard);
-                            i++;
-                        }
-                        deckEdited = new DeckWithCards(newDeck, newCards);
+                boolean hasEmptyKeyOrValue = false;
+                for (int i = 0; i < currentRowsNb; i++) {
+                    if (keys[i].isEmpty() || values[i].isEmpty()) {
+                        hasEmptyKeyOrValue = true;
                     }
+                }
+
+                if (topic.equals("")) {
+                    Toast.makeText(getContext(), "Il manque la matière", Toast.LENGTH_LONG).show();
+                } else if (title.equals("")) {
+                    Toast.makeText(getContext(), "Il manque un titre", Toast.LENGTH_LONG).show();
+                } else if (hasEmptyKeyOrValue){
+                    Toast.makeText(getContext(), "Des cases sont vides", Toast.LENGTH_LONG).show();
+                }else{
+
+                    deckEdited = (isEditionMode)? editDeck() : createDeck();
 
                     mCallback.onDeckEdited(deckEdited);
                 }
             }
         });
-    }
-
-    private void showDeckCurrentValues(DeckWithCards d){
-
-        titleEditText.setText(d.getTitle());
-        topicEditText.setText(d.getTopic());
-        descriptionEditText.setText(d.getDescription());
-
-        for(int i = 0; i<d.getCards().size(); i++) {
-            //Get and show Keys
-            String cardKey = d.getCards().get(i).getKey();
-            EditText key =  (EditText)tableLayout.findViewWithTag("key"+i);
-            key.setText(cardKey);
-
-            //Get and show Values
-            String cardValue = d.getCards().get(i).getValue();
-            EditText value =  (EditText)tableLayout.findViewWithTag("value"+i);
-            value.setText(cardValue);
-        }
-        /*
-        Glide.with(this)
-                .load(p.getPhotoUrl())
-                .into(this.imageViewPreview);
-        uriImageSelected = Uri.parse(p.getPhotoUrl());
-        */
-        }
-
-    private void getDataFromUserInput(){
-
-        topic = topicEditText.getText().toString();
-        title = titleEditText.getText().toString();
-        description = descriptionEditText.getText().toString();
-
-        keys = new String [currentRowsNb];
-        values = new String[currentRowsNb];
-
-        for(int i = 0; i<currentRowsNb ;i++){
-            EditText key =  (EditText)tableLayout.findViewWithTag("key"+i);
-            EditText value =  (EditText)tableLayout.findViewWithTag("value"+i);
-            keys[i] = key.getText().toString();
-            values[i] = value.getText().toString();
-        }
-
     }
 
     private void createRows(int totalRows){
@@ -198,6 +143,82 @@ public class EditionFragment extends Fragment {
         currentRowsNb++;
 
         tableLayout.addView(row);
+    }
+
+
+    // -------------------------
+    // RETRIEVE DATA
+    // -------------------------
+
+    private void showDeckCurrentValues(DeckWithCards d){
+
+        titleEditText.setText(d.getTitle());
+        topicEditText.setText(d.getTopic());
+        descriptionEditText.setText(d.getDescription());
+
+        for(int i = 0; i<d.getCards().size(); i++) {
+            //Get and show Keys
+            String cardKey = d.getCards().get(i).getKey();
+            EditText key =  (EditText)tableLayout.findViewWithTag("key"+i);
+            key.setText(cardKey);
+
+            //Get and show Values
+            String cardValue = d.getCards().get(i).getValue();
+            EditText value =  (EditText)tableLayout.findViewWithTag("value"+i);
+            value.setText(cardValue);
+        }
+        /*
+        Glide.with(this)
+                .load(p.getPhotoUrl())
+                .into(this.imageViewPreview);
+        uriImageSelected = Uri.parse(p.getPhotoUrl());
+        */
+    }
+
+    private void getDataFromUserInput(){
+
+        topic = topicEditText.getText().toString();
+        title = titleEditText.getText().toString();
+        description = descriptionEditText.getText().toString();
+
+        keys = new String [currentRowsNb];
+        values = new String[currentRowsNb];
+
+        for(int i = 0; i<currentRowsNb ;i++){
+            EditText key =  (EditText)tableLayout.findViewWithTag("key"+i);
+            EditText value =  (EditText)tableLayout.findViewWithTag("value"+i);
+            keys[i] = key.getText().toString();
+            values[i] = value.getText().toString();
+        }
+
+    }
+
+    private DeckWithCards editDeck(){
+        Deck editedDeck = new Deck(deck.getId(), topic, title, description, deck.getImgUrl());
+
+        ArrayList<Card> cardsEdited = new ArrayList<>();
+
+        for(int i = 0; i<deck.getCards().size(); i++) {
+            Card editedCard = new Card(deck.getCards().get(i).getId(), deck.getId(), keys[i], values[i], 0);
+            cardsEdited.add(editedCard);
+        }
+
+        return new DeckWithCards(editedDeck, cardsEdited);
+
+    }
+
+    private DeckWithCards createDeck(){
+        Deck newDeck = new Deck(nextDeckId, topic, title, description, "");
+
+        ArrayList<Card> newCards = new ArrayList<>();
+
+        for(int i = 0; i<keys.length; i++){
+            Card newCard = new Card((nextCardId), nextDeckId, keys[i], values[i], 0);
+            newCards.add(newCard);
+            nextCardId++;
+        }
+
+        return new DeckWithCards(newDeck, newCards);
     }
 
     // -------------------------
