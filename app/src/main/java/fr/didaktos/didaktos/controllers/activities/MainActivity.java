@@ -54,7 +54,7 @@ public class MainActivity  extends AppCompatActivity
         this.configureToolbar();
 
         this.configureViewModel();
-        this.populateDatabase();
+        //this.populateDatabase();
         Stetho.initializeWithDefaults(this);
 
         currentDate = Utils.getCurrentDate();

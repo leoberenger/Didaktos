@@ -31,13 +31,13 @@ public class DecksViewHolder extends RecyclerView.ViewHolder {
     public void updateWithDeck(DeckWithCards d, RequestManager glide, int currentPosition, int selectedPosition){
 
         if(selectedPosition == currentPosition){
-            this.itemLayout.setBackgroundColor(Color.parseColor("#62efff"));
+            this.itemLayout.setBackgroundColor(Color.parseColor("#008ba3"));
             this.itemTopic.setTextColor(Color.WHITE);
             this.itemTitle.setTextColor(Color.WHITE);
         }else {
             this.itemLayout.setBackgroundResource(R.drawable.border);
             this.itemTopic.setTextColor(Color.parseColor("#008ba3"));
-            this.itemTitle.setTextColor(Color.parseColor("#008ba3"));
+            this.itemTitle.setTextColor(Color.parseColor("#00bcd4"));
         }
         //Img
         glide.load(d.getImgUrl()).into(itemImg);

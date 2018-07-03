@@ -145,7 +145,7 @@
             android:id="@+id/detail_btn"
             android:layout_width="@dimen/btn_width_large"
             android:layout_height="@dimen/btn_height_large"
-            android:background="@color/colorAccent"
+            android:background="@color/colorPrimary"
             android:textSize="@dimen/text_large"
             android:textColor="@android:color/white"
             android:text="@string/detail_btn"/>
