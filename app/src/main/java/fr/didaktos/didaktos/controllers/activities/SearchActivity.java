@@ -40,18 +40,14 @@ public class SearchActivity extends AppCompatActivity
         this.configureSpinner(R.array.search_topic, spinnerTopic);
     }
 
+    //--------------------------------
+    //CONFIGURATION
+    //--------------------------------
+
     private void configureToolbar(){
         setSupportActionBar(mToolbar);
         ActionBar ab = getSupportActionBar();
         ab.setDisplayHomeAsUpEnabled(true);
-    }
-
-    @OnClick(R.id.search_btn)
-    void searchBtnClick(){
-        Log.e(TAG, "topic selected = " + topicSelected);
-        Intent intentSearch = new Intent(this, MainActivity.class);
-        intentSearch.putExtra("topicSelected", topicSelected);
-        startActivity(intentSearch);
     }
 
     private void configureSpinner(int idRStringArray, Spinner spinner){
@@ -64,6 +60,18 @@ public class SearchActivity extends AppCompatActivity
         spinner.setOnItemSelectedListener(this);
     }
 
+    //--------------------------------
+    //ACTIONS
+    //--------------------------------
+
+    @OnClick(R.id.search_btn)
+    void searchBtnClick(){
+        Log.e(TAG, "topic selected = " + topicSelected);
+        Intent intentSearch = new Intent(this, MainActivity.class);
+        intentSearch.putExtra("topicSelected", topicSelected);
+        startActivity(intentSearch);
+    }
+
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         topicSelected = parent.getItemAtPosition(position).toString();
@@ -71,4 +79,5 @@ public class SearchActivity extends AppCompatActivity
 
     @Override
     public void onNothingSelected(AdapterView<?> parent) {}
+
 }

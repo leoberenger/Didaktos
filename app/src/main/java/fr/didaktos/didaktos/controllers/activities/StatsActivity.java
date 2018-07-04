@@ -42,6 +42,10 @@ public class StatsActivity extends AppCompatActivity
         this.configureAndShowStatsFragment();
     }
 
+    //-----------------------------
+    //CONFIGURATION
+    //-----------------------------
+
     private void configureToolbar(){
         setSupportActionBar(mToolbar);
         ActionBar ab = getSupportActionBar();
@@ -63,6 +67,10 @@ public class StatsActivity extends AppCompatActivity
                     .commit();
         }
     }
+
+    //-----------------------------
+    //ACTION
+    //-----------------------------
 
     @Override
     public void onDeckSelected(DeckWithCards deck) {

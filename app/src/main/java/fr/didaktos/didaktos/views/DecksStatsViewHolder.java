@@ -22,7 +22,6 @@ public class DecksStatsViewHolder extends RecyclerView.ViewHolder {
     @BindView(R.id.stats_item_progressBar) ProgressBar statsProgressBar;
 
 
-
     public DecksStatsViewHolder(View itemView){
         super(itemView);
         ButterKnife.bind(this, itemView);
